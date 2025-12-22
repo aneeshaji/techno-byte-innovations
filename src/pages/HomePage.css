@@ -1,0 +1,46 @@
+.home-page {
+  position: relative;
+}
+
+/* Hero styles are imported from Hero.css */
+
+.featured-services {
+  background: linear-gradient(180deg, transparent 0%, rgba(139, 92, 246, 0.05) 100%);
+}
+
+.featured-projects {
+  background: linear-gradient(180deg, rgba(139, 92, 246, 0.05) 0%, rgba(6, 182, 212, 0.05) 100%);
+}
+
+.cta-center {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-12);
+}
+
+.cta-section {
+  background: linear-gradient(180deg, rgba(6, 182, 212, 0.05) 0%, transparent 100%);
+}
+
+.cta-box {
+  text-align: center;
+  padding: var(--space-16);
+  border-radius: var(--radius-2xl);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.cta-box h2 {
+  font-size: var(--text-4xl);
+  margin-bottom: var(--space-4);
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.cta-box p {
+  font-size: var(--text-lg);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-8);
+}

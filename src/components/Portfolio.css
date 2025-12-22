@@ -1,0 +1,70 @@
+.portfolio {
+  background: linear-gradient(180deg, transparent 0%, rgba(6, 182, 212, 0.05) 100%);
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: var(--space-8);
+}
+
+.project-card {
+  overflow: hidden;
+  padding: 0;
+  animation: fadeInUp var(--transition-slow) ease-out both;
+}
+
+.project-header {
+  height: 200px;
+  position: relative;
+  transition: transform var(--transition-base);
+}
+
+.project-card:hover .project-header {
+  transform: scale(1.05);
+}
+
+.project-content {
+  padding: var(--space-6);
+}
+
+.project-title {
+  font-size: var(--text-2xl);
+  margin-bottom: var(--space-3);
+  color: var(--color-text-primary);
+}
+
+.project-description {
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  margin-bottom: var(--space-4);
+}
+
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.tech-tag {
+  padding: var(--space-1) var(--space-3);
+  background: rgba(139, 92, 246, 0.1);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  color: var(--color-primary-light);
+  font-weight: var(--font-medium);
+  transition: all var(--transition-fast);
+}
+
+.tech-tag:hover {
+  background: rgba(139, 92, 246, 0.2);
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+}
