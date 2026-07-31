@@ -1,5 +1,7 @@
+import type { Variants, TargetAndTransition } from 'framer-motion';
+
 // Page transition variants
-export const pageVariants = {
+export const pageVariants: Variants = {
   initial: {
     opacity: 0,
     y: 20
@@ -23,7 +25,7 @@ export const pageVariants = {
 };
 
 // Fade in from bottom
-export const fadeInUp = {
+export const fadeInUp: Variants = {
   hidden: {
     opacity: 0,
     y: 30
@@ -39,7 +41,7 @@ export const fadeInUp = {
 };
 
 // Fade in from left
-export const fadeInLeft = {
+export const fadeInLeft: Variants = {
   hidden: {
     opacity: 0,
     x: -30
@@ -55,7 +57,7 @@ export const fadeInLeft = {
 };
 
 // Fade in from right
-export const fadeInRight = {
+export const fadeInRight: Variants = {
   hidden: {
     opacity: 0,
     x: 30
@@ -71,7 +73,7 @@ export const fadeInRight = {
 };
 
 // Scale in
-export const scaleIn = {
+export const scaleIn: Variants = {
   hidden: {
     opacity: 0,
     scale: 0.8
@@ -87,7 +89,7 @@ export const scaleIn = {
 };
 
 // Stagger container for lists
-export const staggerContainer = {
+export const staggerContainer: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -99,7 +101,7 @@ export const staggerContainer = {
 };
 
 // Stagger item
-export const staggerItem = {
+export const staggerItem: Variants = {
   hidden: {
     opacity: 0,
     y: 20
@@ -115,7 +117,7 @@ export const staggerItem = {
 };
 
 // Hover scale
-export const hoverScale = {
+export const hoverScale: TargetAndTransition = {
   scale: 1.05,
   transition: {
     duration: 0.3,
@@ -124,7 +126,7 @@ export const hoverScale = {
 };
 
 // Hover lift
-export const hoverLift = {
+export const hoverLift: TargetAndTransition = {
   y: -8,
   transition: {
     duration: 0.3,
@@ -133,7 +135,7 @@ export const hoverLift = {
 };
 
 // Counter animation
-export const counterVariants = {
+export const counterVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,

@@ -1,250 +1,378 @@
-import { motion } from 'framer-motion';
+import { motion, useInView, type Variants } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { staggerContainer, staggerItem, fadeInUp } from '../utils/animations';
 import SEO from '../components/SEO';
-import '../components/Hero.css';
-import '../components/Services.css';
-import '../components/Portfolio.css';
 import './HomePage.css';
 
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 32 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] as const }
+  })
+};
+
+const stagger: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1 } }
+};
+
+const marqueeItems = [
+  'React', 'Next.js', 'Node.js', 'Flutter', 'React Native',
+  'AWS', 'Docker', 'TensorFlow', 'PostgreSQL', 'TypeScript',
+  'Figma', 'GraphQL', 'Redis', 'Kubernetes', 'Python',
+  'React', 'Next.js', 'Node.js', 'Flutter', 'React Native',
+  'AWS', 'Docker', 'TensorFlow', 'PostgreSQL', 'TypeScript',
+  'Figma', 'GraphQL', 'Redis', 'Kubernetes', 'Python',
+];
+
+const services = [
+  {
+    num: '01',
+    icon: '🌐',
+    title: 'Web Development',
+    desc: 'Custom web apps built with React, Next.js and Node.js for performance and scale.',
+  },
+  {
+    num: '02',
+    icon: '📱',
+    title: 'Mobile Apps',
+    desc: 'Native iOS & Android apps plus cross-platform solutions with Flutter and React Native.',
+  },
+  {
+    num: '03',
+    icon: '🤖',
+    title: 'AI & Machine Learning',
+    desc: 'Intelligent systems powered by TensorFlow, PyTorch and cutting-edge LLM integrations.',
+  },
+];
+
+const projects = [
+  {
+    title: 'ATSense',
+    cat: 'AI · SaaS',
+    blurb: 'Our flagship AI hiring platform that clears candidate filters instantly, matching the right talent to the right role.',
+    tech: ['AI/ML', 'React', 'Cloud'],
+    gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    url: 'https://atsense.online/',
+    featured: true,
+  },
+  {
+    title: 'FramezLabs',
+    cat: 'E-Commerce',
+    blurb: 'Custom photo frames & personalized gifts marketplace — a complete storefront serving customers across India.',
+    tech: ['React', 'Node.js', 'Payments'],
+    gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+    url: 'https://framezlabs.store/',
+  },
+  {
+    title: 'Balancely CRM',
+    cat: 'CRM · Cloud',
+    blurb: 'Accounts panel and CRM for managing customers, billing and relationships from a single dashboard.',
+    tech: ['Next.js', 'PostgreSQL', 'AWS'],
+    gradient: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+    url: 'https://balancely-crm.technobyteinnovations.in/',
+  },
+  {
+    title: 'FramezLabs ERP',
+    cat: 'ERP · Enterprise',
+    blurb: 'Enterprise resource planning system powering operations — inventory, orders, production and reporting.',
+    tech: ['React', 'Node.js', 'MongoDB'],
+    gradient: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
+    url: 'https://erp.framezlabs.store/',
+  },
+  {
+    title: 'Paperstall',
+    cat: 'Platform',
+    blurb: 'A reading destination where sellers and readers connect to discover and shop their next great book.',
+    tech: ['React', 'Node.js', 'PostgreSQL'],
+    gradient: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+    url: 'https://paperstall.com/',
+  },
+];
+
+const features = [
+  { icon: '⚡', title: 'Rapid Delivery', desc: 'Agile sprints with weekly demos — ship faster without sacrificing quality.' },
+  { icon: '🔒', title: 'Security First', desc: 'Every project follows OWASP best practices and modern security standards.' },
+  { icon: '📈', title: 'Built to Scale', desc: 'Architecture designed for growth — from MVP to millions of users.' },
+  { icon: '🤝', title: 'Dedicated Support', desc: 'Post-launch maintenance, monitoring and feature updates.' },
+];
+
+const ROTATING_WORDS = ['Products.', 'Experiences.', 'Systems.'];
+
+const RotatingWord = () => {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => setIndex((i) => (i + 1) % ROTATING_WORDS.length), 2400);
+    return () => clearInterval(id);
+  }, []);
+
+  return (
+    <span className="rotating-word" key={index} aria-live="polite">
+      {ROTATING_WORDS[index]}
+    </span>
+  );
+};
+
+const Counter = ({ value, suffix = '' }: { value: number; suffix?: string }) => {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: '-40px' });
+  const [display, setDisplay] = useState(0);
+
+  useEffect(() => {
+    if (!inView) return;
+    let raf = 0;
+    const start = performance.now();
+    const duration = 1600;
+    const tick = (now: number) => {
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3); // easeOutCubic
+      setDisplay(Math.round(eased * value));
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [inView, value]);
+
+  return (
+    <span ref={ref} className="counter-value">
+      {display}
+      {suffix}
+    </span>
+  );
+};
+
 const HomePage = () => {
-    const featuredServices = [
-        {
-            icon: '🌐',
-            title: 'Web Development',
-            description: 'Custom web applications built with modern frameworks for scalable solutions.'
-        },
-        {
-            icon: '📱',
-            title: 'Mobile Apps',
-            description: 'Native and cross-platform mobile applications for iOS and Android.'
-        },
-        {
-            icon: '🤖',
-            title: 'AI & Machine Learning',
-            description: 'Intelligent systems powered by cutting-edge AI technologies.'
-        }
-    ];
+  return (
+    <div className="home-page">
+      <SEO
+        title="Home"
+        description="TechnoByteInnovations delivers cutting-edge software solutions including web development, mobile apps, cloud solutions, and AI/ML services. Transform your business with innovative technology in Trivandrum, Kerala."
+        canonicalUrl="/"
+        keywords="software development company Kerala, web development Trivandrum, mobile app development India, AI ML solutions Kerala, cloud solutions"
+      />
 
-    const featuredProjects = [
-        {
-            title: 'E-Commerce Platform',
-            description: 'Full-featured online marketplace with real-time inventory and analytics.',
-            tech: ['React', 'Node.js', 'MongoDB'],
-            gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
-        },
-        {
-            title: 'Healthcare System',
-            description: 'HIPAA-compliant patient management with telemedicine features.',
-            tech: ['Next.js', 'PostgreSQL', 'AWS'],
-            gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)'
-        },
-        {
-            title: 'AI Analytics Dashboard',
-            description: 'Real-time business intelligence with predictive analytics.',
-            tech: ['React', 'Python', 'TensorFlow'],
-            gradient: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)'
-        }
-    ];
+      {/* ── Hero ── */}
+      <section id="hero" className="hero">
+        <div className="hero-glow" />
+        <div className="hero-glow-2" />
+        <div className="hero-orb hero-orb-1" />
+        <div className="hero-orb hero-orb-2" />
+        <div className="hero-orb hero-orb-3" />
 
-    return (
-        <div className="home-page">
-            <SEO
-                title="Home"
-                description="TechnoByteInnovations delivers cutting-edge software solutions including web development, mobile apps, cloud solutions, and AI/ML services. Transform your business with innovative technology in Trivandrum, Kerala."
-                canonicalUrl="/"
-                keywords="software development company Kerala, web development Trivandrum, mobile app development India, AI ML solutions Kerala, cloud solutions Trivandrum, custom software development"
-            />
-            {/* Hero Section */}
-            <section id="hero" className="hero">
-                <div className="hero-background">
-                    <div className="gradient-orb orb-1"></div>
-                    <div className="gradient-orb orb-2"></div>
-                    <div className="gradient-orb orb-3"></div>
+        <div className="container">
+          <div className="hero-inner">
+            {/* Left */}
+            <motion.div
+              className="hero-content"
+              initial="hidden"
+              animate="visible"
+              variants={stagger}
+            >
+              <motion.div className="hero-badge" variants={fadeUp} custom={0}>
+                <span className="hero-badge-dot" />
+                <span className="hero-badge-text">Trivandrum, Kerala — Est. 2019</span>
+              </motion.div>
+
+              <motion.h1 className="hero-title" variants={fadeUp} custom={1}>
+                We Build<br />
+                <span className="line-indigo">Digital</span><br />
+                <span className="line-lime line-shine"><RotatingWord /></span>
+              </motion.h1>
+
+              <motion.p className="hero-desc" variants={fadeUp} custom={2}>
+                From concept to launch — we craft scalable web apps, mobile products,
+                and AI-powered systems that drive real business growth.
+              </motion.p>
+
+              <motion.div className="hero-actions" variants={fadeUp} custom={3}>
+                <Link to="/contact" className="btn btn-primary btn-lg">
+                  Start a Project →
+                </Link>
+                <Link to="/portfolio" className="btn btn-outline btn-lg">
+                  View Work
+                </Link>
+              </motion.div>
+            </motion.div>
+
+            {/* Right — Stats */}
+            <motion.div
+              className="hero-right"
+              initial="hidden"
+              animate="visible"
+              variants={stagger}
+            >
+              <motion.div className="hero-stats-grid" variants={fadeUp} custom={2}>
+                <div className="stat-tile">
+                  <div className="stat-number"><Counter value={50} suffix="+" /></div>
+                  <div className="stat-label">Projects Delivered</div>
+                  <div className="stat-desc">Across 10+ industries — from startups to enterprises</div>
                 </div>
-
-                <div className="container hero-container">
-                    <motion.div
-                        className="hero-content"
-                        initial="hidden"
-                        animate="visible"
-                        variants={staggerContainer}
-                    >
-                        <motion.h1 className="hero-title" variants={fadeInUp}>
-                            Transforming Ideas Into
-                            <br />
-                            <span className="gradient-text">Digital Reality</span>
-                        </motion.h1>
-
-                        <motion.p className="hero-subtitle" variants={fadeInUp}>
-                            We craft cutting-edge software solutions that drive innovation and accelerate business growth.
-                            From web and mobile applications to AI-powered systems, we turn your vision into reality.
-                        </motion.p>
-
-                        <motion.div className="hero-cta" variants={fadeInUp}>
-                            <Link to="/contact" className="btn btn-primary btn-lg">
-                                Get Started
-                            </Link>
-                            <Link to="/portfolio" className="btn btn-secondary btn-lg">
-                                View Our Work
-                            </Link>
-                        </motion.div>
-                    </motion.div>
-
-                    <motion.div
-                        className="hero-stats"
-                        initial="hidden"
-                        animate="visible"
-                        variants={staggerContainer}
-                    >
-                        <motion.div className="stat-card glass" variants={staggerItem}>
-                            <div className="stat-number gradient-text">50+</div>
-                            <div className="stat-label">Projects Delivered</div>
-                        </motion.div>
-                        <motion.div className="stat-card glass" variants={staggerItem}>
-                            <div className="stat-number gradient-text">30+</div>
-                            <div className="stat-label">Happy Clients</div>
-                        </motion.div>
-                        <motion.div className="stat-card glass" variants={staggerItem}>
-                            <div className="stat-number gradient-text">5+</div>
-                            <div className="stat-label">Years Experience</div>
-                        </motion.div>
-                    </motion.div>
+                <div className="stat-tile">
+                  <div className="stat-number"><Counter value={30} suffix="+" /></div>
+                  <div className="stat-label">Happy Clients</div>
                 </div>
-            </section>
-
-            {/* Featured Services */}
-            <section className="section featured-services">
-                <div className="container">
-                    <motion.div
-                        className="section-header"
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true, amount: 0.3 }}
-                        variants={fadeInUp}
-                    >
-                        <h2 className="section-title">Our Expertise</h2>
-                        <p className="section-subtitle">
-                            Comprehensive software solutions tailored to your business needs
-                        </p>
-                    </motion.div>
-
-                    <motion.div
-                        className="services-grid"
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true, amount: 0.2 }}
-                        variants={staggerContainer}
-                    >
-                        {featuredServices.map((service, index) => (
-                            <motion.div
-                                key={index}
-                                className="service-card card"
-                                variants={staggerItem}
-                                whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                            >
-                                <div className="service-icon">{service.icon}</div>
-                                <h3 className="service-title">{service.title}</h3>
-                                <p className="service-description">{service.description}</p>
-                            </motion.div>
-                        ))}
-                    </motion.div>
-
-                    <motion.div
-                        className="cta-center"
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        variants={fadeInUp}
-                    >
-                        <Link to="/services" className="btn btn-primary">
-                            View All Services
-                        </Link>
-                    </motion.div>
+                <div className="stat-tile">
+                  <div className="stat-number"><Counter value={5} suffix="+" /></div>
+                  <div className="stat-label">Years Experience</div>
                 </div>
-            </section>
-
-            {/* Featured Projects */}
-            <section className="section featured-projects">
-                <div className="container">
-                    <motion.div
-                        className="section-header"
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true, amount: 0.3 }}
-                        variants={fadeInUp}
-                    >
-                        <h2 className="section-title">Featured Projects</h2>
-                        <p className="section-subtitle">
-                            Showcasing our best work and successful client partnerships
-                        </p>
-                    </motion.div>
-
-                    <motion.div
-                        className="portfolio-grid"
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true, amount: 0.2 }}
-                        variants={staggerContainer}
-                    >
-                        {featuredProjects.map((project, index) => (
-                            <motion.div
-                                key={index}
-                                className="project-card card"
-                                variants={staggerItem}
-                                whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                            >
-                                <div
-                                    className="project-header"
-                                    style={{ background: project.gradient }}
-                                ></div>
-                                <div className="project-content">
-                                    <h3 className="project-title">{project.title}</h3>
-                                    <p className="project-description">{project.description}</p>
-                                    <div className="project-tech">
-                                        {project.tech.map((tech, i) => (
-                                            <span key={i} className="tech-tag">{tech}</span>
-                                        ))}
-                                    </div>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </motion.div>
-
-                    <motion.div
-                        className="cta-center"
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        variants={fadeInUp}
-                    >
-                        <Link to="/portfolio" className="btn btn-primary">
-                            View All Projects
-                        </Link>
-                    </motion.div>
-                </div>
-            </section>
-
-            {/* CTA Section */}
-            <section className="section cta-section">
-                <div className="container">
-                    <motion.div
-                        className="cta-box glass"
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        variants={fadeInUp}
-                    >
-                        <h2>Ready to Start Your Project?</h2>
-                        <p>Let's build something amazing together. Get in touch with our team today.</p>
-                        <Link to="/contact" className="btn btn-primary btn-lg">
-                            Contact Us
-                        </Link>
-                    </motion.div>
-                </div>
-            </section>
+              </motion.div>
+            </motion.div>
+          </div>
         </div>
-    );
+      </section>
+
+      {/* ── Marquee ── */}
+      <div className="marquee-section">
+        <div className="marquee-track">
+          <div className="marquee-inner">
+            {marqueeItems.map((item, i) => (
+              <span key={i} className="marquee-item">
+                {item}
+                {i < marqueeItems.length - 1 && <span className="dot">·</span>}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ── Services ── */}
+      <section className="services-preview">
+        <div className="container">
+          <div className="services-header">
+            <div>
+              <div className="section-label">What We Do</div>
+              <h2 className="services-heading">
+                Our Core<br /><span style={{ color: 'var(--color-indigo)' }}>Services</span>
+              </h2>
+            </div>
+            <Link to="/services" className="btn btn-outline">
+              All Services →
+            </Link>
+          </div>
+
+          <motion.div
+            className="services-cards"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={stagger}
+          >
+            {services.map((s, i) => (
+              <motion.div key={i} className="service-preview-card" variants={fadeUp} custom={i}>
+                <div className="svc-num">{s.num}</div>
+                <div className="svc-icon">{s.icon}</div>
+                <div className="svc-title">{s.title}</div>
+                <p className="svc-desc">{s.desc}</p>
+                <Link to="/services" className="svc-arrow">
+                  Learn more <span>→</span>
+                </Link>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── Featured Projects ── */}
+      <section className="projects-section">
+        <div className="container">
+          <div className="projects-header">
+            <div>
+              <div className="section-label">Case Studies</div>
+              <h2 className="projects-heading">
+                Featured<br /><span style={{ color: 'var(--color-lime)' }}>Projects</span>
+              </h2>
+            </div>
+            <Link to="/portfolio" className="btn btn-outline">
+              Full Portfolio →
+            </Link>
+          </div>
+
+          <motion.div
+            className="projects-list"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            variants={stagger}
+          >
+            {projects.map((p, i) => (
+              <motion.div key={i} className="project-row" variants={fadeUp} custom={i}>
+                <a
+                  href={p.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="project-row-link"
+                  aria-label={`View ${p.title}`}
+                >
+                  <div className="project-thumb" style={{ background: p.gradient }} />
+                  <div className="project-info">
+                    {p.featured && <span className="project-featured">★ Flagship</span>}
+                    <span className="project-cat">{p.cat}</span>
+                    <div className="project-name">{p.title}</div>
+                    <p className="project-blurb">{p.blurb}</p>
+                  </div>
+                  <div className="project-tech-list">
+                    {p.tech.map((t, j) => (
+                      <span key={j} className="tech-chip">{t}</span>
+                    ))}
+                    <span className="project-open" aria-hidden="true">↗</span>
+                  </div>
+                </a>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── Why Us ── */}
+      <section className="why-section">
+        <div className="container">
+          <div className="why-grid">
+            <motion.div
+              className="why-left"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
+            >
+              <div className="section-label">Why Choose Us</div>
+              <h2>
+                Built on<br /><span style={{ color: 'var(--color-lime)' }}>Trust</span> &<br />
+                <span style={{ color: 'var(--color-indigo)' }}>Expertise</span>
+              </h2>
+              <p>
+                We don't just write code — we partner with you to understand your business,
+                define the right solution, and deliver it on time.
+              </p>
+              <Link to="/about" className="btn btn-indigo">
+                About Us →
+              </Link>
+            </motion.div>
+
+            <motion.div
+              className="why-features"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={stagger}
+            >
+              {features.map((f, i) => (
+                <motion.div key={i} className="why-feature" variants={fadeUp} custom={i}>
+                  <div className="feature-icon-box">{f.icon}</div>
+                  <div className="feature-text">
+                    <h4>{f.title}</h4>
+                    <p>{f.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
 };
 
 export default HomePage;

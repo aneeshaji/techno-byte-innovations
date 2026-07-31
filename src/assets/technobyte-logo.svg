@@ -1,0 +1,26 @@
+<svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- TechnoByte monogram — bold interlocking T (lime) + B (indigo) on a 44px canvas
+       sized to match .navbar-logo-image in Navbar.css (44x44). -->
+  <defs>
+    <linearGradient id="limeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C6FF3D"/>
+      <stop offset="100%" stop-color="#52E500"/>
+    </linearGradient>
+    <linearGradient id="indigoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5B4EFF"/>
+      <stop offset="100%" stop-color="#9333EA"/>
+    </linearGradient>
+  </defs>
+
+  <!-- T — lime, weighted bar + stem -->
+  <rect x="6" y="7" width="17" height="7" rx="3.5" fill="url(#limeGrad)"/>
+  <rect x="12" y="14" width="7" height="21" rx="3.5" fill="url(#limeGrad)"/>
+
+  <!-- B — indigo, backbone + two right bulges -->
+  <rect x="26" y="8" width="7" height="28" rx="3.5" fill="url(#indigoGrad)"/>
+  <circle cx="35" cy="15" r="5.5" fill="url(#indigoGrad)"/>
+  <circle cx="35" cy="30" r="5.5" fill="url(#indigoGrad)"/>
+
+  <!-- Byte node — dark accent on the T stem -->
+  <circle cx="15.5" cy="17" r="1.5" fill="#060608"/>
+</svg>

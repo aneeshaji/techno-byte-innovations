@@ -38,7 +38,7 @@ const Contact = () => {
                         <div className="info-card glass">
                             <div className="info-icon">📧</div>
                             <h3>Email Us</h3>
-                            <p>contact@technobyteinnovations.com</p>
+                            <p>contact@technobyteinnovations.in</p>
                         </div>
 
                         <div className="info-card glass">

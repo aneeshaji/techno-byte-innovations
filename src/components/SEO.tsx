@@ -17,7 +17,7 @@ const SEO = ({
     ogImage = '/og-image.jpg',
     ogType = 'website'
 }: SEOProps) => {
-    const baseUrl = 'https://technobyteinnovations.com';
+    const baseUrl = 'https://technobyteinnovations.in';
     const fullTitle = `${title} | TechnoByteInnovations`;
     const url = canonicalUrl ? `${baseUrl}${canonicalUrl}` : baseUrl;
 

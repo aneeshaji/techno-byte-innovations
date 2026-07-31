@@ -128,7 +128,7 @@ const PrivacyPolicyPage = () => {
                             If you have any questions about this Privacy Policy, please contact us at:
                         </p>
                         <p>
-                            <strong>Email:</strong> contact@technobyteinnovations.com<br />
+                            <strong>Email:</strong> contact@technobyteinnovations.in<br />
                             <strong>Location:</strong> Trivandrum, Kerala, India
                         </p>
                     </motion.div>

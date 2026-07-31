@@ -1,167 +1,218 @@
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { staggerContainer, staggerItem, fadeInUp } from '../utils/animations';
 import SEO from '../components/SEO';
-import '../components/Services.css';
 import './ServicesPage.css';
 
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 28 },
+  visible: (i = 0) => ({
+    opacity: 1, y: 0,
+    transition: { duration: 0.65, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] as const }
+  })
+};
+
+const stagger: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.09 } }
+};
+
+const services = [
+  {
+    num: '01', icon: '🌐',
+    title: 'Web Development',
+    description: 'Custom web applications built with modern frameworks like React, Next.js, and Node.js for scalable, high-performance solutions.',
+    features: ['Responsive Design', 'Progressive Web Apps', 'E-commerce Solutions', 'CMS Integration']
+  },
+  {
+    num: '02', icon: '📱',
+    title: 'Mobile Apps',
+    description: 'Native and cross-platform mobile applications for iOS and Android that deliver exceptional user experiences.',
+    features: ['iOS Development', 'Android Development', 'React Native', 'Flutter']
+  },
+  {
+    num: '03', icon: '☁️',
+    title: 'Cloud Solutions',
+    description: 'Cloud infrastructure design, migration, and management using AWS, Azure, and Google Cloud Platform.',
+    features: ['Cloud Migration', 'DevOps & CI/CD', 'Serverless Architecture', 'Container Orchestration']
+  },
+  {
+    num: '04', icon: '🤖',
+    title: 'AI & Machine Learning',
+    description: 'Intelligent systems powered by machine learning, natural language processing, and computer vision technologies.',
+    features: ['Predictive Analytics', 'NLP Solutions', 'Computer Vision', 'Chatbots & Automation']
+  },
+  {
+    num: '05', icon: '🎨',
+    title: 'UI/UX Design',
+    description: 'Beautiful, intuitive interfaces designed with user-centered principles to maximize engagement and conversion.',
+    features: ['User Research', 'Wireframing', 'Prototyping', 'Design Systems']
+  },
+  {
+    num: '06', icon: '🔧',
+    title: 'DevOps & Automation',
+    description: 'CI/CD pipelines, infrastructure as code, and automated testing to streamline your development workflow.',
+    features: ['CI/CD Pipelines', 'Infrastructure as Code', 'Monitoring & Logging', 'Automated Testing']
+  },
+];
+
 const ServicesPage = () => {
-    const services = [
-        {
-            icon: '🌐',
-            title: 'Web Development',
-            description: 'Custom web applications built with modern frameworks like React, Next.js, and Node.js for scalable, high-performance solutions.',
-            features: ['Responsive Design', 'Progressive Web Apps', 'E-commerce Solutions', 'CMS Integration']
-        },
-        {
-            icon: '📱',
-            title: 'Mobile Apps',
-            description: 'Native and cross-platform mobile applications for iOS and Android that deliver exceptional user experiences.',
-            features: ['iOS Development', 'Android Development', 'React Native', 'Flutter']
-        },
-        {
-            icon: '☁️',
-            title: 'Cloud Solutions',
-            description: 'Cloud infrastructure design, migration, and management using AWS, Azure, and Google Cloud Platform.',
-            features: ['Cloud Migration', 'DevOps', 'Serverless Architecture', 'Container Orchestration']
-        },
-        {
-            icon: '🤖',
-            title: 'AI & Machine Learning',
-            description: 'Intelligent systems powered by machine learning, natural language processing, and computer vision technologies.',
-            features: ['Predictive Analytics', 'NLP Solutions', 'Computer Vision', 'Chatbots & Automation']
-        },
-        {
-            icon: '🎨',
-            title: 'UI/UX Design',
-            description: 'Beautiful, intuitive interfaces designed with user-centered principles to maximize engagement and conversion.',
-            features: ['User Research', 'Wireframing', 'Prototyping', 'Design Systems']
-        },
-        {
-            icon: '🔧',
-            title: 'DevOps & Automation',
-            description: 'CI/CD pipelines, infrastructure as code, and automated testing to streamline your development workflow.',
-            features: ['CI/CD Pipelines', 'Infrastructure as Code', 'Monitoring & Logging', 'Automated Testing']
-        }
-    ];
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
-    return (
-        <div className="services-page">
-            <SEO
-                title="Our Services"
-                description="Expert software development services including custom web development, mobile apps, cloud solutions, AI/ML integration, and DevOps. Professional technology solutions in Trivandrum, Kerala."
-                canonicalUrl="/services"
-                keywords="web development services, mobile app development, cloud computing services, AI ML development, DevOps services Kerala, software consulting Trivandrum"
-            />
-            <section className="page-hero">
-                <div className="container">
-                    <motion.div
-                        initial="hidden"
-                        animate="visible"
-                        variants={fadeInUp}
-                    >
-                        <h1 className="page-title">Our Services</h1>
-                        <p className="page-subtitle">
-                            Comprehensive software solutions designed to transform your business and drive growth
-                        </p>
-                    </motion.div>
-                </div>
-            </section>
+  return (
+    <div className="services-page">
+      <SEO
+        title="Our Services"
+        description="Expert software development services including custom web development, mobile apps, cloud solutions, AI/ML integration, and DevOps. Professional technology solutions in Trivandrum, Kerala."
+        canonicalUrl="/services"
+        keywords="web development services, mobile app development, cloud computing services, AI ML development, DevOps services Kerala"
+      />
 
-            <section className="section services">
-                <div className="container">
-                    <motion.div
-                        className="services-grid-detailed"
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true, amount: 0.1 }}
-                        variants={staggerContainer}
-                    >
-                        {services.map((service, index) => (
-                            <motion.div
-                                key={index}
-                                className="service-card-detailed card"
-                                variants={staggerItem}
-                                whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                            >
-                                <div className="service-icon-large">{service.icon}</div>
-                                <h3 className="service-title">{service.title}</h3>
-                                <p className="service-description">{service.description}</p>
-                                <ul className="service-features">
-                                    {service.features.map((feature, i) => (
-                                        <li key={i}>
-                                            <span className="feature-check">✓</span>
-                                            {feature}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </motion.div>
-                        ))}
-                    </motion.div>
-                </div>
-            </section>
-
-            <section className="section process-section">
-                <div className="container">
-                    <motion.div
-                        className="section-header"
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        variants={fadeInUp}
-                    >
-                        <h2 className="section-title">Our Process</h2>
-                        <p className="section-subtitle">
-                            A proven methodology that delivers results
-                        </p>
-                    </motion.div>
-
-                    <motion.div
-                        className="process-steps"
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true, amount: 0.2 }}
-                        variants={staggerContainer}
-                    >
-                        {[
-                            { step: '01', title: 'Discovery', description: 'Understanding your goals and requirements' },
-                            { step: '02', title: 'Planning', description: 'Strategic roadmap and technical architecture' },
-                            { step: '03', title: 'Development', description: 'Agile development with regular updates' },
-                            { step: '04', title: 'Launch', description: 'Deployment and ongoing support' }
-                        ].map((item, index) => (
-                            <motion.div
-                                key={index}
-                                className="process-step glass"
-                                variants={staggerItem}
-                            >
-                                <div className="step-number gradient-text">{item.step}</div>
-                                <h3>{item.title}</h3>
-                                <p>{item.description}</p>
-                            </motion.div>
-                        ))}
-                    </motion.div>
-                </div>
-            </section>
-
-            <section className="section cta-section">
-                <div className="container">
-                    <motion.div
-                        className="cta-box glass"
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        variants={fadeInUp}
-                    >
-                        <h2>Ready to Get Started?</h2>
-                        <p>Let's discuss how we can help bring your project to life.</p>
-                        <Link to="/contact" className="btn btn-primary btn-lg">
-                            Contact Us Today
-                        </Link>
-                    </motion.div>
-                </div>
-            </section>
+      {/* Hero */}
+      <section className="page-hero">
+        <div className="page-hero-glow" />
+        <div className="container">
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={stagger}
+          >
+            <motion.div className="section-label" variants={fadeUp} custom={0}>
+              What We Offer
+            </motion.div>
+            <motion.div className="page-hero-inner" variants={fadeUp} custom={1}>
+              <div>
+                <h1 className="page-title">
+                  Our<br /><span>Services</span>
+                </h1>
+              </div>
+              <p className="page-subtitle">
+                Comprehensive software solutions designed to transform your business and accelerate growth — from first line of code to production.
+              </p>
+            </motion.div>
+          </motion.div>
         </div>
-    );
+      </section>
+
+      {/* Accordion Services */}
+      <section className="services-accordion">
+        <div className="container">
+          <motion.div
+            className="accordion-list"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            variants={stagger}
+          >
+            {services.map((svc, i) => {
+              const isOpen = openIndex === i;
+              return (
+                <motion.div key={i} className="accordion-item" variants={fadeUp} custom={i}>
+                  <button
+                    id={`service-${i}`}
+                    className="accordion-trigger"
+                    onClick={() => setOpenIndex(isOpen ? null : i)}
+                    aria-expanded={isOpen}
+                    aria-controls={`service-body-${i}`}
+                  >
+                    <span className="acc-num">{svc.num}</span>
+                    <span className="acc-icon">{svc.icon}</span>
+                    <span className="accordion-title">{svc.title}</span>
+                    <span className={`acc-chevron ${isOpen ? 'open' : ''}`}>▼</span>
+                  </button>
+
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        id={`service-body-${i}`}
+                        className="accordion-body"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] as const }}
+                      >
+                        <div className="accordion-content">
+                          <div>
+                            <p className="acc-desc">{svc.description}</p>
+                            <ul className="acc-features">
+                              {svc.features.map((f, j) => (
+                                <li key={j}>{f}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Process */}
+      <section className="process-section">
+        <div className="container">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+          >
+            <div className="section-label">How We Work</div>
+            <h2 className="process-heading">
+              Our Process
+            </h2>
+          </motion.div>
+
+          <motion.div
+            className="process-steps"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={stagger}
+          >
+            {[
+              { num: '01', title: 'Discovery', desc: 'Deep-dive into your goals, users, and constraints.' },
+              { num: '02', title: 'Planning', desc: 'Architecture, roadmap, and sprint planning.' },
+              { num: '03', title: 'Development', desc: 'Agile build with weekly demos and feedback loops.' },
+              { num: '04', title: 'Launch & Support', desc: 'Deployment, monitoring, and ongoing maintenance.' },
+            ].map((step, i) => (
+              <motion.div key={i} className="process-step" variants={fadeUp} custom={i}>
+                <div className="step-num">{step.num}</div>
+                <div className="step-title">{step.title}</div>
+                <p className="step-desc">{step.desc}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="services-cta">
+        <div className="container">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+          >
+            <h2 className="cta-heading">
+              Ready to Get<br /><span>Started?</span>
+            </h2>
+            <p className="cta-sub">
+              Let's discuss how we can help bring your project to life with our expertise.
+            </p>
+            <div className="cta-actions">
+              <Link to="/contact" className="btn btn-primary btn-lg">Contact Us Today →</Link>
+              <Link to="/portfolio" className="btn btn-outline btn-lg">View Portfolio</Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+    </div>
+  );
 };
 
 export default ServicesPage;

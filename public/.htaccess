@@ -1,0 +1,30 @@
+# ---------------------------------------------------------------------------
+# SPA fallback for React Router (BrowserRouter)
+# Routes every non-file / non-directory request to index.html so deep links
+# like /services, /portfolio, /contact don't 404 on a direct visit or refresh.
+# ---------------------------------------------------------------------------
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Do not rewrite existing files or directories (assets, robots.txt, sitemap.xml)
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+
+  # Everything else goes to the React app
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+# ---------------------------------------------------------------------------
+# Optional: cache static assets. Vite content-hashes filenames, so long
+# cache lifetimes for hashed assets are safe.
+# ---------------------------------------------------------------------------
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType image/svg+xml "access plus 1 month"
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/webp "access plus 1 month"
+  ExpiresByType text/css "access plus 1 week"
+  ExpiresByType application/javascript "access plus 1 year"
+</IfModule>
