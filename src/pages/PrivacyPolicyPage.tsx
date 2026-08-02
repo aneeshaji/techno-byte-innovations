@@ -1,10 +1,18 @@
 import { motion } from 'framer-motion';
+import SEO from '../components/SEO';
 import { fadeInUp } from '../utils/animations';
+import { CONTACT_EMAIL } from '../utils/siteConfig';
 import './LegalPage.css';
 
 const PrivacyPolicyPage = () => {
     return (
         <div className="legal-page">
+            <SEO
+                title="Privacy Policy"
+                description="Read TechnoByteInnovations' privacy policy to understand how we collect, use, and protect your personal information when you use our website and services."
+                canonicalUrl="/privacy-policy"
+            />
+
             <section className="page-hero">
                 <div className="container">
                     <motion.div
@@ -128,7 +136,7 @@ const PrivacyPolicyPage = () => {
                             If you have any questions about this Privacy Policy, please contact us at:
                         </p>
                         <p>
-                            <strong>Email:</strong> contact@technobyteinnovations.in<br />
+                            <strong>Email:</strong> {CONTACT_EMAIL}<br />
                             <strong>Location:</strong> Trivandrum, Kerala, India
                         </p>
                     </motion.div>

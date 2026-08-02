@@ -2,6 +2,9 @@ import { useState } from 'react';
 import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
+import Magnetic from '../components/Magnetic';
+import PageHero from '../components/PageHero';
+import { portfolioPageSchema } from '../utils/seo';
 import './PortfolioPage.css';
 
 const fadeUp: Variants = {
@@ -81,32 +84,20 @@ const PortfolioPage = () => {
   return (
     <div className="portfolio-page">
       <SEO
-        title="Our Portfolio"
+        title="Our Portfolio — Successful Projects & Case Studies"
         description="Explore our portfolio of successful projects including web applications, mobile apps, e-commerce solutions, and enterprise software. See how we've helped businesses transform with technology."
         canonicalUrl="/portfolio"
         keywords="software projects Kerala, web development portfolio, mobile app projects, technology case studies"
+        schema={portfolioPageSchema(projects)}
       />
 
       {/* Hero */}
-      <section className="page-hero">
-        <div className="page-hero-glow" />
-        <div className="container">
-          <motion.div initial="hidden" animate="visible" variants={stagger}>
-            <motion.div className="section-label" variants={fadeUp} custom={0}>Our Work</motion.div>
-            <motion.div className="page-hero-inner" variants={fadeUp} custom={1}>
-              <div>
-                <h1 className="page-title">
-                  Our<br /><span>Portfolio</span>
-                </h1>
-              </div>
-              <p className="page-subtitle">
-                Showcasing our expertise through successful client projects — each built
-                to solve real problems and create lasting impact.
-              </p>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
+      <PageHero
+        label="Our Work"
+        line1="Our"
+        line2="Portfolio"
+        subtitle="Showcasing our expertise through successful client projects — each built to solve real problems and create lasting impact."
+      />
 
       {/* Projects */}
       <section className="portfolio-section">
@@ -197,8 +188,8 @@ const PortfolioPage = () => {
               Let's discuss how we can bring your vision to life with our expertise.
             </p>
             <div className="cta-actions">
-              <Link to="/contact" className="btn btn-primary btn-lg">Start Your Project →</Link>
-              <Link to="/services" className="btn btn-outline btn-lg">Our Services</Link>
+              <Magnetic><Link to="/contact" className="btn btn-primary btn-lg">Start Your Project →</Link></Magnetic>
+              <Magnetic><Link to="/services" className="btn btn-outline btn-lg">Our Services</Link></Magnetic>
             </div>
           </motion.div>
         </div>

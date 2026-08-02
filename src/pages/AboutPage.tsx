@@ -1,6 +1,8 @@
 import { motion, type Variants } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
+import Magnetic from '../components/Magnetic';
+import PageHero from '../components/PageHero';
 import './AboutPage.css';
 
 const fadeUp: Variants = {
@@ -34,32 +36,19 @@ const AboutPage = () => {
   return (
     <div className="about-page">
       <SEO
-        title="About Us"
+        title="About Us — Your Digital Transformation Partner in Kerala"
         description="Learn about TechnoByteInnovations — your trusted partner in digital transformation. We deliver innovative software solutions with expertise in web development, mobile apps, AI/ML, and cloud technologies in Kerala, India."
         canonicalUrl="/about"
         keywords="software company Kerala, IT company Trivandrum, technology consulting India, software development expertise, digital transformation Kerala"
       />
 
       {/* Hero */}
-      <section className="page-hero">
-        <div className="page-hero-glow" />
-        <div className="container">
-          <motion.div initial="hidden" animate="visible" variants={stagger}>
-            <motion.div className="section-label" variants={fadeUp} custom={0}>Who We Are</motion.div>
-            <motion.div className="page-hero-inner" variants={fadeUp} custom={1}>
-              <div>
-                <h1 className="page-title">
-                  About<br /><span>Us</span>
-                </h1>
-              </div>
-              <p className="page-subtitle">
-                Passionate technologists dedicated to transforming businesses through
-                innovative, high-quality software solutions — built to last.
-              </p>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
+      <PageHero
+        label="Who We Are"
+        line1="About"
+        line2="Us"
+        subtitle="Passionate technologists dedicated to transforming businesses through innovative, high-quality software solutions — built to last."
+      />
 
       {/* Story */}
       <section className="about-story section">
@@ -140,10 +129,12 @@ const AboutPage = () => {
             variants={stagger}
           >
             {values.map((v, i) => (
-              <motion.div key={i} className="value-card" variants={fadeUp} custom={i}>
-                <span className="value-icon">{v.icon}</span>
-                <div className="value-title">{v.title}</div>
-                <p className="value-desc">{v.desc}</p>
+              <motion.div key={i} className="tilt-cell" variants={fadeUp} custom={i}>
+                <div className="value-card">
+                  <span className="value-icon">{v.icon}</span>
+                  <div className="value-title">{v.title}</div>
+                  <p className="value-desc">{v.desc}</p>
+                </div>
               </motion.div>
             ))}
           </motion.div>
@@ -199,8 +190,8 @@ const AboutPage = () => {
             </h2>
             <p className="cta-sub">Ready to start your next project? We'd love to hear about it.</p>
             <div className="cta-actions">
-              <Link to="/contact" className="btn btn-primary btn-lg">Get In Touch →</Link>
-              <Link to="/services" className="btn btn-outline btn-lg">Our Services</Link>
+              <Magnetic><Link to="/contact" className="btn btn-primary btn-lg">Get In Touch →</Link></Magnetic>
+              <Magnetic><Link to="/services" className="btn btn-outline btn-lg">Our Services</Link></Magnetic>
             </div>
           </motion.div>
         </div>

@@ -1,10 +1,18 @@
 import { motion } from 'framer-motion';
+import SEO from '../components/SEO';
 import { fadeInUp } from '../utils/animations';
+import { CONTACT_EMAIL } from '../utils/siteConfig';
 import './LegalPage.css';
 
 const TermsOfServicePage = () => {
     return (
         <div className="legal-page">
+            <SEO
+                title="Terms of Service"
+                description="Read the terms of service governing your use of TechnoByteInnovations' website and software development services."
+                canonicalUrl="/terms-of-service"
+            />
+
             <section className="page-hero">
                 <div className="container">
                     <motion.div
@@ -146,7 +154,7 @@ const TermsOfServicePage = () => {
                             For questions about these Terms of Service, please contact us at:
                         </p>
                         <p>
-                            <strong>Email:</strong> contact@technobyteinnovations.in<br />
+                            <strong>Email:</strong> {CONTACT_EMAIL}<br />
                             <strong>Location:</strong> Trivandrum, Kerala, India
                         </p>
                     </motion.div>

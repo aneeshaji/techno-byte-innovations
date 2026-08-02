@@ -2,6 +2,9 @@ import { useState } from 'react';
 import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
+import Magnetic from '../components/Magnetic';
+import PageHero from '../components/PageHero';
+import { servicesPageSchema } from '../utils/seo';
 import './ServicesPage.css';
 
 const fadeUp: Variants = {
@@ -62,37 +65,20 @@ const ServicesPage = () => {
   return (
     <div className="services-page">
       <SEO
-        title="Our Services"
+        title="Web, Mobile, Cloud & AI Development Services"
         description="Expert software development services including custom web development, mobile apps, cloud solutions, AI/ML integration, and DevOps. Professional technology solutions in Trivandrum, Kerala."
         canonicalUrl="/services"
         keywords="web development services, mobile app development, cloud computing services, AI ML development, DevOps services Kerala"
+        schema={servicesPageSchema(services)}
       />
 
       {/* Hero */}
-      <section className="page-hero">
-        <div className="page-hero-glow" />
-        <div className="container">
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={stagger}
-          >
-            <motion.div className="section-label" variants={fadeUp} custom={0}>
-              What We Offer
-            </motion.div>
-            <motion.div className="page-hero-inner" variants={fadeUp} custom={1}>
-              <div>
-                <h1 className="page-title">
-                  Our<br /><span>Services</span>
-                </h1>
-              </div>
-              <p className="page-subtitle">
-                Comprehensive software solutions designed to transform your business and accelerate growth — from first line of code to production.
-              </p>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
+      <PageHero
+        label="What We Offer"
+        line1="Our"
+        line2="Services"
+        subtitle="Comprehensive software solutions designed to transform your business and accelerate growth — from first line of code to production."
+      />
 
       {/* Accordion Services */}
       <section className="services-accordion">
@@ -179,10 +165,12 @@ const ServicesPage = () => {
               { num: '03', title: 'Development', desc: 'Agile build with weekly demos and feedback loops.' },
               { num: '04', title: 'Launch & Support', desc: 'Deployment, monitoring, and ongoing maintenance.' },
             ].map((step, i) => (
-              <motion.div key={i} className="process-step" variants={fadeUp} custom={i}>
-                <div className="step-num">{step.num}</div>
-                <div className="step-title">{step.title}</div>
-                <p className="step-desc">{step.desc}</p>
+              <motion.div key={i} className="tilt-cell" variants={fadeUp} custom={i}>
+                <div className="process-step">
+                  <div className="step-num">{step.num}</div>
+                  <div className="step-title">{step.title}</div>
+                  <p className="step-desc">{step.desc}</p>
+                </div>
               </motion.div>
             ))}
           </motion.div>
@@ -205,8 +193,8 @@ const ServicesPage = () => {
               Let's discuss how we can help bring your project to life with our expertise.
             </p>
             <div className="cta-actions">
-              <Link to="/contact" className="btn btn-primary btn-lg">Contact Us Today →</Link>
-              <Link to="/portfolio" className="btn btn-outline btn-lg">View Portfolio</Link>
+              <Magnetic><Link to="/contact" className="btn btn-primary btn-lg">Contact Us Today →</Link></Magnetic>
+              <Magnetic><Link to="/portfolio" className="btn btn-outline btn-lg">View Portfolio</Link></Magnetic>
             </div>
           </motion.div>
         </div>

@@ -43,10 +43,13 @@
 }
 
 .story-metric {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--r-lg);
-  padding: var(--sp-6);
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--sp-4);
+  transition: border-top-color var(--t-base) var(--ease-out);
+}
+
+.story-metric:hover {
+  border-top-color: rgba(186, 255, 41, 0.5);
 }
 
 .metric-val {
@@ -66,7 +69,6 @@
 /* ── Values ── */
 .values-section {
   padding: var(--sp-24) 0;
-  background: var(--color-bg-2);
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
 }
@@ -96,16 +98,13 @@
 }
 
 .value-card {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--r-xl);
-  padding: var(--sp-7);
-  transition: all var(--t-base) var(--ease-out);
+  padding: var(--sp-6) 0 0;
+  border-top: 1px solid var(--color-border);
+  transition: border-top-color var(--t-base) var(--ease-out);
 }
 
 .value-card:hover {
-  border-color: var(--color-border-accent);
-  transform: translateY(-6px);
+  border-top-color: rgba(186, 255, 41, 0.5);
 }
 
 .value-icon {
@@ -225,7 +224,6 @@
 .about-cta {
   padding: var(--sp-24) 0;
   text-align: center;
-  background: var(--color-bg-2);
   border-top: 1px solid var(--color-border);
 }
 

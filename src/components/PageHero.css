@@ -1,0 +1,90 @@
+/* ── Animated page-hero extras (base styles live in index.css) ── */
+
+.page-hero-glow {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 500px;
+  height: 400px;
+  background: radial-gradient(ellipse at top right, rgba(91, 78, 255, 0.1) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.page-hero-glow-2 {
+  position: absolute;
+  bottom: -30%;
+  left: -5%;
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, rgba(186, 255, 41, 0.06) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+/* Floating tech orbs (mouse-parallax layer) */
+.page-hero-parallax {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.page-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.page-orb-1 {
+  top: 20%;
+  right: 12%;
+  width: 10px;
+  height: 10px;
+  background: var(--color-lime);
+  box-shadow: 0 0 16px rgba(186, 255, 41, 0.7);
+  animation: pageOrbFloat 6s ease-in-out infinite;
+}
+
+.page-orb-2 {
+  top: 55%;
+  left: 6%;
+  width: 6px;
+  height: 6px;
+  background: var(--color-indigo);
+  box-shadow: 0 0 12px rgba(91, 78, 255, 0.7);
+  animation: pageOrbFloat 8s ease-in-out infinite reverse;
+}
+
+.page-orb-3 {
+  bottom: 15%;
+  right: 30%;
+  width: 7px;
+  height: 7px;
+  background: rgba(186, 255, 41, 0.6);
+  box-shadow: 0 0 14px rgba(186, 255, 41, 0.5);
+  animation: pageOrbFloat 7s ease-in-out infinite 1.2s;
+}
+
+@keyframes pageOrbFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.45; }
+  50% { transform: translate(12px, -22px) scale(1.25); opacity: 1; }
+}
+
+/* Scroll-linked wrapper + keeps content above the canvas/orbs */
+.page-hero-scroll {
+  position: relative;
+  z-index: 1;
+  will-change: transform, opacity;
+}
+
+/* Masked per-line title reveal */
+.page-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+.page-line-inner {
+  display: inline-block;
+  will-change: transform;
+}

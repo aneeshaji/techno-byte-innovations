@@ -1,0 +1,17 @@
+.tilt-card {
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.tilt-spotlight {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--t-base) var(--ease-out);
+}
+
+.tilt-card:hover .tilt-spotlight {
+  opacity: 1;
+}

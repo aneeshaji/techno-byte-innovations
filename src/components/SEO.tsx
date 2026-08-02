@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet';
+import { SITE_NAME, SITE_URL } from '../utils/siteConfig';
 
 interface SEOProps {
     title: string;
@@ -7,6 +8,7 @@ interface SEOProps {
     canonicalUrl?: string;
     ogImage?: string;
     ogType?: string;
+    schema?: Record<string, unknown>;
 }
 
 const SEO = ({
@@ -14,12 +16,12 @@ const SEO = ({
     description,
     keywords = 'software development, web development, mobile apps, cloud solutions, AI, machine learning, TechnoByteInnovations, Trivandrum, Kerala',
     canonicalUrl,
-    ogImage = '/og-image.jpg',
-    ogType = 'website'
+    ogImage = '/logo.png',
+    ogType = 'website',
+    schema,
 }: SEOProps) => {
-    const baseUrl = 'https://technobyteinnovations.in';
-    const fullTitle = `${title} | TechnoByteInnovations`;
-    const url = canonicalUrl ? `${baseUrl}${canonicalUrl}` : baseUrl;
+    const fullTitle = `${title} | ${SITE_NAME}`;
+    const url = canonicalUrl ? `${SITE_URL}${canonicalUrl}` : SITE_URL;
 
     return (
         <Helmet>
@@ -35,8 +37,8 @@ const SEO = ({
             <meta property="og:url" content={url} />
             <meta property="og:title" content={fullTitle} />
             <meta property="og:description" content={description} />
-            <meta property="og:image" content={`${baseUrl}${ogImage}`} />
-            <meta property="og:site_name" content="TechnoByteInnovations" />
+            <meta property="og:image" content={`${SITE_URL}${ogImage}`} />
+            <meta property="og:site_name" content={SITE_NAME} />
             <meta property="og:locale" content="en_IN" />
 
             {/* Twitter */}
@@ -44,13 +46,16 @@ const SEO = ({
             <meta property="twitter:url" content={url} />
             <meta property="twitter:title" content={fullTitle} />
             <meta property="twitter:description" content={description} />
-            <meta property="twitter:image" content={`${baseUrl}${ogImage}`} />
+            <meta property="twitter:image" content={`${SITE_URL}${ogImage}`} />
 
             {/* Additional Meta Tags */}
             <meta name="robots" content="index, follow" />
             <meta name="language" content="English" />
             <meta name="revisit-after" content="7 days" />
-            <meta name="author" content="TechnoByteInnovations" />
+            <meta name="author" content={SITE_NAME} />
+
+            {/* Structured data (JSON-LD) */}
+            {schema && <script type="application/ld+json">{JSON.stringify(schema)}</script>}
         </Helmet>
     );
 };

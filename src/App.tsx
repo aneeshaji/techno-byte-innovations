@@ -2,6 +2,9 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import { AnimatePresence } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import Analytics from './components/Analytics';
+import ScrollProgressBar from './components/ScrollProgressBar';
+import WhatsAppButton from './components/WhatsAppButton';
 import ScrollToTop from './components/ScrollToTop';
 import PageTransition from './components/PageTransition';
 import HomePage from './pages/HomePage';
@@ -34,8 +37,11 @@ function AnimatedRoutes() {
 function App() {
   return (
     <Router>
+      <Analytics />
       <ScrollToTop />
+      <WhatsAppButton />
       <div className="app">
+        <ScrollProgressBar />
         <Navbar />
         <main>
           <AnimatedRoutes />

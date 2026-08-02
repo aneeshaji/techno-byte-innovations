@@ -1,7 +1,18 @@
 import { useState } from 'react';
 import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import SEO from '../components/SEO';
+import Magnetic from '../components/Magnetic';
+import PageHero from '../components/PageHero';
+import { CONTACT_EMAIL, PHONE_DISPLAY, PHONE_TEL, WHATSAPP_URL } from '../utils/siteConfig';
+import { faqPageSchema } from '../utils/seo';
 import './ContactPage.css';
+
+/**
+ * Paste your Formspree endpoint URL (https://formspree.io/f/xxxx) here to have
+ * submissions delivered server-side. Until then the form falls back to opening
+ * the visitor's email app addressed to the contact inbox.
+ */
+const FORMSPREE_ENDPOINT = '';
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 28 },
@@ -37,48 +48,65 @@ const faqs = [
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({ name: '', email: '', company: '', message: '' });
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error' | 'mailto'>('idle');
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setStatus('sending');
+
+    const payload = {
+      name: formData.name,
+      email: formData.email,
+      company: formData.company,
+      message: formData.message,
+      _subject: 'New enquiry — technobyteinnovations.in',
+    };
+
+    if (FORMSPREE_ENDPOINT) {
+      try {
+        const res = await fetch(FORMSPREE_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        if (!res.ok) throw new Error(`Form submission failed (${res.status})`);
+        setStatus('success');
+      } catch {
+        setStatus('error');
+      }
+    } else {
+      // Fallback: open the visitor's mail client pre-addressed to the inbox.
+      const subject = encodeURIComponent(`New enquiry from ${formData.name || 'website visitor'}`);
+      const body = encodeURIComponent(
+        `Name: ${formData.name}\nEmail: ${formData.email}\nCompany: ${formData.company}\n\n${formData.message}`
+      );
+      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+      setStatus('mailto');
+    }
   };
 
   return (
     <div className="contact-page">
       <SEO
-        title="Contact Us"
+        title="Contact Us — Start Your Project Today"
         description="Get in touch with TechnoByteInnovations for your software development needs. Located in Trivandrum, Kerala. Contact us for web development, mobile apps, cloud solutions, and AI/ML services."
         canonicalUrl="/contact"
         keywords="contact software company Kerala, IT services Trivandrum contact, software development inquiry"
+        schema={faqPageSchema(faqs)}
       />
 
       {/* Hero */}
-      <section className="page-hero">
-        <div className="page-hero-glow" />
-        <div className="container">
-          <motion.div initial="hidden" animate="visible" variants={stagger}>
-            <motion.div className="section-label" variants={fadeUp} custom={0}>
-              Say Hello
-            </motion.div>
-            <motion.div className="page-hero-inner" variants={fadeUp} custom={1}>
-              <div>
-                <h1 className="page-title">
-                  Get In<br /><span>Touch</span>
-                </h1>
-              </div>
-              <p className="page-subtitle">
-                Ready to start your next project? Have a question? We'd love to hear from you — let's make something great together.
-              </p>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
+      <PageHero
+        label="Say Hello"
+        line1="Get In"
+        line2="Touch"
+        subtitle="Ready to start your next project? Have a question? We'd love to hear from you — let's make something great together."
+      />
 
       {/* Contact Split */}
       <section className="contact-section">
@@ -104,7 +132,28 @@ const ContactPage = () => {
                   <div className="detail-icon">📧</div>
                   <div className="detail-text">
                     <span className="detail-label">Email</span>
-                    <span className="detail-value">contact@technobyteinnovations.in</span>
+                    <a className="detail-value detail-link" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+                  </div>
+                </div>
+                <div className="contact-detail-row">
+                  <div className="detail-icon">📞</div>
+                  <div className="detail-text">
+                    <span className="detail-label">Phone</span>
+                    <a className="detail-value detail-link" href={PHONE_TEL}>{PHONE_DISPLAY}</a>
+                  </div>
+                </div>
+                <div className="contact-detail-row">
+                  <div className="detail-icon">💬</div>
+                  <div className="detail-text">
+                    <span className="detail-label">WhatsApp</span>
+                    <a
+                      className="detail-value detail-link"
+                      href={WHATSAPP_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Chat with us — replies in minutes
+                    </a>
                   </div>
                 </div>
                 <div className="contact-detail-row">
@@ -137,12 +186,23 @@ const ContactPage = () => {
               variants={fadeUp}
               custom={1}
             >
-              {submitted ? (
+              {status === 'success' ? (
                 <div className="contact-form">
                   <div className="form-success">
                     <span className="success-icon">✅</span>
                     <h3>Message Sent!</h3>
                     <p>Thank you for reaching out. We'll get back to you within 24 hours.</p>
+                  </div>
+                </div>
+              ) : status === 'mailto' ? (
+                <div className="contact-form">
+                  <div className="form-success">
+                    <span className="success-icon">📨</span>
+                    <h3>Check Your Email App</h3>
+                    <p>
+                      Your email app should have opened with your message ready to send to{' '}
+                      {CONTACT_EMAIL}. If it didn't, email us directly.
+                    </p>
                   </div>
                 </div>
               ) : (
@@ -200,15 +260,24 @@ const ContactPage = () => {
                       rows={5}
                     />
                   </div>
-                  <motion.button
-                    type="submit"
-                    className="btn btn-primary btn-lg form-submit"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    id="contact-submit-btn"
-                  >
-                    Send Message →
-                  </motion.button>
+                  {status === 'error' && (
+                    <p className="form-error" role="alert">
+                      Something went wrong sending your message. Please email us directly at{' '}
+                      <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> or try again.
+                    </p>
+                  )}
+                  <Magnetic>
+                    <motion.button
+                      type="submit"
+                      className="btn btn-primary btn-lg form-submit"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      disabled={status === 'sending'}
+                      id="contact-submit-btn"
+                    >
+                      {status === 'sending' ? 'Sending…' : 'Send Message →'}
+                    </motion.button>
+                  </Magnetic>
                 </form>
               )}
             </motion.div>
