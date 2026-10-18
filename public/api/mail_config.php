@@ -40,7 +40,7 @@ return [
         'port'       => 465,                               // 465 (SSL) or 587 (TLS)
         'encryption' => 'ssl',                             // 'ssl' for port 465, 'tls' for port 587
         'username'   => 'enquiries@technobyteinnovations.in',
-        'password'   => '',   // ⚠️  ENTER YOUR cPanel EMAIL PASSWORD HERE
+        'password'   => 'Anee3434@1991',   // ⚠️  ENTER YOUR cPanel EMAIL PASSWORD HERE
         'timeout'    => 30,
     ],
 
