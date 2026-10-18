@@ -147,9 +147,9 @@
 
 .footer-brand-desc {
   font-size: var(--text-sm);
-  color: var(--color-text-3);
+  color: var(--color-text-2);
   line-height: 1.7;
-  max-width: 260px;
+  max-width: 280px;
   margin-bottom: var(--sp-6);
 }
 
@@ -166,7 +166,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-text-3);
+  color: var(--color-text-2);
   font-size: 14px;
   transition: all var(--t-fast) var(--ease-out);
   text-decoration: none;
@@ -182,10 +182,10 @@
 .footer-col-heading {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-text-3);
+  color: var(--color-lime);
   margin-bottom: var(--sp-5);
 }
 

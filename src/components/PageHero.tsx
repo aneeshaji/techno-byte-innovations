@@ -23,16 +23,6 @@ const stagger: Variants = {
   visible: { transition: { staggerChildren: 0.1 } }
 };
 
-const lineReveal: Variants = {
-  hidden: { y: '110%' },
-  visible: { y: '0%', transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] } },
-};
-
-const linesStagger: Variants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.12 } },
-};
-
 const PageHero = ({ label, line1, line2, subtitle }: PageHeroProps) => {
   const heroRef = useRef<HTMLElement | null>(null);
   const reduceMotion = useReducedMotion() === true;
@@ -55,10 +45,9 @@ const PageHero = ({ label, line1, line2, subtitle }: PageHeroProps) => {
   const orbX = useTransform(sx, (v) => v * 40);
   const orbY = useTransform(sy, (v) => v * 40);
 
-  // Scroll-linked hero fade as you scroll away.
+  // Scroll-linked hero gentle parallax (keep opacity 100% so text is always readable)
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
-  const scrollY = useTransform(scrollYProgress, [0, 1], [0, -40]);
-  const scrollOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const scrollY = useTransform(scrollYProgress, [0, 1], [0, -30]);
 
   return (
     <section className="page-hero" ref={heroRef}>
@@ -78,7 +67,7 @@ const PageHero = ({ label, line1, line2, subtitle }: PageHeroProps) => {
       <div className="container">
         <motion.div
           className="page-hero-scroll"
-          style={reduceMotion ? undefined : { y: scrollY, opacity: scrollOpacity }}
+          style={reduceMotion ? undefined : { y: scrollY }}
         >
           <motion.div
             initial={reduceMotion ? false : 'hidden'}
@@ -90,13 +79,9 @@ const PageHero = ({ label, line1, line2, subtitle }: PageHeroProps) => {
             </motion.div>
             <div className="page-hero-inner">
               <div>
-                <motion.h1 className="page-title" variants={linesStagger}>
-                  <span className="page-line">
-                    <motion.span className="page-line-inner" variants={lineReveal}>{line1}</motion.span>
-                  </span>
-                  <span className="page-line">
-                    <motion.span className="page-line-inner page-title-accent" variants={lineReveal}>{line2}</motion.span>
-                  </span>
+                <motion.h1 className="page-title" variants={fadeUp} custom={1}>
+                  <span className="page-line">{line1}</span>
+                  <span className="page-line page-title-accent">{line2}</span>
                 </motion.h1>
               </div>
               <motion.p className="page-subtitle" variants={fadeUp} custom={2}>

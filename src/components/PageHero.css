@@ -72,19 +72,14 @@
 /* Scroll-linked wrapper + keeps content above the canvas/orbs */
 .page-hero-scroll {
   position: relative;
-  z-index: 1;
-  will-change: transform, opacity;
+  z-index: 2;
 }
 
-/* Masked per-line title reveal */
+/* Per-line title styling */
 .page-line {
   display: block;
-  overflow: hidden;
-  padding-bottom: 0.08em;
-  margin-bottom: -0.08em;
 }
 
 .page-line-inner {
   display: inline-block;
-  will-change: transform;
 }

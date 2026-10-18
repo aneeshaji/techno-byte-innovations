@@ -7,10 +7,10 @@
 :root {
   /* ── Core Colors ── */
   --color-bg:           #060608;
-  --color-bg-2:         #0d0d12;
-  --color-bg-3:         #12121a;
-  --color-surface:      #111118;
-  --color-surface-2:    #1a1a24;
+  --color-bg-2:         #0c0c14;
+  --color-bg-3:         #12121e;
+  --color-surface:      #11111c;
+  --color-surface-2:    #181826;
 
   /* ── Brand Accent ── */
   --color-indigo:       #5B4EFF;
@@ -19,22 +19,27 @@
   --color-lime:         #BAFF29;
   --color-lime-dark:    #9BDD1A;
 
-  /* ── Text ── */
-  --color-text:         #F0F0F5;
-  --color-text-2:       #A0A0B8;
-  --color-text-3:       #606078;
+  /* ── Text (High-contrast, crystal-clear readability) ── */
+  --color-text:         #FFFFFF;
+  --color-text-2:       #D8D8E8;
+  --color-text-3:       #A6A6C0;
   --color-text-inv:     #060608;
 
+  /* ── Compatibility Aliases ── */
+  --primary:            var(--color-lime);
+  --text-primary:       var(--color-text);
+  --text-secondary:     var(--color-text-2);
+
   /* ── Border ── */
-  --color-border:       rgba(255, 255, 255, 0.08);
-  --color-border-2:     rgba(255, 255, 255, 0.04);
-  --color-border-accent: rgba(91, 78, 255, 0.4);
+  --color-border:       rgba(255, 255, 255, 0.12);
+  --color-border-2:     rgba(255, 255, 255, 0.08);
+  --color-border-accent: rgba(91, 78, 255, 0.5);
 
   /* ── Gradients ── */
   --gradient-indigo:    linear-gradient(135deg, #5B4EFF 0%, #9333EA 100%);
   --gradient-lime:      linear-gradient(135deg, #BAFF29 0%, #52E500 100%);
   --gradient-glow:      radial-gradient(ellipse at center, rgba(91,78,255,0.15) 0%, transparent 70%);
-  --gradient-card:      linear-gradient(145deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+  --gradient-card:      linear-gradient(160deg, rgba(22, 22, 34, 0.96) 0%, rgba(13, 13, 22, 0.98) 100%);
 
   /* ── Typography ── */
   --font-display:  'Outfit', system-ui, sans-serif;
@@ -405,10 +410,10 @@ a {
 
 /* ── Glass surface ── */
 .glass {
-  background: linear-gradient(160deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
-  backdrop-filter: blur(18px) saturate(140%);
-  -webkit-backdrop-filter: blur(18px) saturate(140%);
-  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: linear-gradient(160deg, rgba(22, 22, 36, 0.92) 0%, rgba(14, 14, 24, 0.95) 100%);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 /* ── Gradient hairline border ── */

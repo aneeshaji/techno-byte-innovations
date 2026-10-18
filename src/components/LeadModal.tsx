@@ -71,27 +71,49 @@ const LeadModal = () => {
     e.preventDefault();
     setStatus('sending');
 
+    const leadPayload = {
+      _subject: `New Lead: ${currentProjectType} from ${formData.name}`,
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      projectType: currentProjectType,
+      budget: formData.budget,
+      message: formData.message,
+    };
+
     try {
-      // Send to FormSubmit endpoint for direct email delivery to the inbox
-      const res = await fetch(`https://formsubmit.co/ajax/${CONTACT_EMAIL}`, {
+      // 1. Primary: Send through native PHP mail API
+      const phpRes = await fetch('/api/contact.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify(leadPayload),
+      });
+
+      if (phpRes.ok) {
+        const data = await phpRes.json().catch(() => null);
+        if (data && data.success !== false) {
+          setStatus('success');
+          return;
+        }
+      }
+
+      // 2. Secondary fallback for local dev environment
+      const fbRes = await fetch(`https://formsubmit.co/ajax/${CONTACT_EMAIL}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
         },
         body: JSON.stringify({
-          _subject: `New Lead: ${currentProjectType} from ${formData.name}`,
-          Name: formData.name,
-          Email: formData.email,
-          Phone: formData.phone,
-          ProjectType: currentProjectType,
-          Budget: formData.budget,
-          Message: formData.message,
+          ...leadPayload,
           _captcha: 'false',
         }),
       });
 
-      if (res.ok) {
+      if (fbRes.ok) {
         setStatus('success');
       } else {
         setStatus('error');

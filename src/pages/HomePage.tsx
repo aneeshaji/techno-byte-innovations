@@ -23,16 +23,7 @@ const stagger: Variants = {
   visible: { transition: { staggerChildren: 0.1 } }
 };
 
-/* Masked per-line hero headline reveal */
-const lineReveal: Variants = {
-  hidden: { y: '110%' },
-  visible: { y: '0%', transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] } },
-};
 
-const linesStagger: Variants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.14, delayChildren: 0.1 } },
-};
 
 /* Section heading entrance */
 const headingReveal: Variants = {
@@ -400,10 +391,9 @@ const HomePage = () => {
   const contentX = useTransform(sx, (v) => v * 14);
   const contentY = useTransform(sy, (v) => v * 14);
 
-  // Scroll-linked hero fade as you scroll away.
+  // Scroll-linked hero gentle parallax (opacity stays 100% so text remains readable)
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
-  const scrollY = useTransform(scrollYProgress, [0, 1], [0, -60]);
-  const scrollOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+  const scrollY = useTransform(scrollYProgress, [0, 1], [0, -40]);
 
   return (
     <div className="home-page">
@@ -433,7 +423,7 @@ const HomePage = () => {
         <div className="container">
           <motion.div
             className="hero-scroll"
-            style={reduceMotion ? undefined : { y: scrollY, opacity: scrollOpacity }}
+            style={reduceMotion ? undefined : { y: scrollY }}
           >
             <div className="hero-inner">
               {/* Left Content */}
@@ -451,14 +441,10 @@ const HomePage = () => {
                   </span>
                 </motion.div>
 
-                <motion.h1 className="hero-title" variants={linesStagger}>
-                  <span className="hero-line">
-                    <motion.span className="hero-line-inner" variants={lineReveal}>Engineering Software That</motion.span>
-                  </span>
-                  <span className="hero-line">
-                    <motion.span className="hero-line-inner line-lime line-shine" variants={lineReveal}>
-                      Scales Your Revenue.
-                    </motion.span>
+                <motion.h1 className="hero-title" variants={fadeUp} custom={1}>
+                  <span className="hero-line">Engineering Software That</span>
+                  <span className="hero-line line-lime line-shine">
+                    Scales Your Revenue.
                   </span>
                 </motion.h1>
 

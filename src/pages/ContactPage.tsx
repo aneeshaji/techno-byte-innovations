@@ -67,16 +67,45 @@ const ContactPage = () => {
       _subject: 'New enquiry — technobyteinnovations.in',
     };
 
-    const endpoint = FORMSPREE_ENDPOINT || `https://formsubmit.co/ajax/${CONTACT_EMAIL}`;
-
     try {
-      const res = await fetch(endpoint, {
+      // 1. Primary: Use Native PHP mail endpoint
+      const phpRes = await fetch('/api/contact.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify(payload),
       });
-      if (!res.ok) throw new Error(`Form submission failed (${res.status})`);
-      setStatus('success');
+
+      if (phpRes.ok) {
+        const data = await phpRes.json().catch(() => null);
+        if (data && data.success !== false) {
+          setStatus('success');
+          return;
+        }
+      }
+
+      // 2. Secondary fallback for local dev server where PHP is unhandled
+      if (FORMSPREE_ENDPOINT) {
+        const fsRes = await fetch(FORMSPREE_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        if (fsRes.ok) {
+          setStatus('success');
+          return;
+        }
+      }
+
+      const fbRes = await fetch(`https://formsubmit.co/ajax/${CONTACT_EMAIL}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      if (fbRes.ok) {
+        setStatus('success');
+        return;
+      }
+      throw new Error('Submission failed');
     } catch {
       // Fallback: open visitor's mail client if network fails
       const subject = encodeURIComponent(`New enquiry from ${formData.name || 'website visitor'}`);

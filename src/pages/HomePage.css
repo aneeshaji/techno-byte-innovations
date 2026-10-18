@@ -172,17 +172,13 @@
   100% { background-position: -200% center; }
 }
 
-/* Masked per-line headline reveal */
+/* Per-line headline */
 .hero-line {
   display: block;
-  overflow: hidden;
-  padding-bottom: 0.08em;
-  margin-bottom: -0.08em;
 }
 
 .hero-line-inner {
   display: inline-block;
-  will-change: transform;
 }
 
 /* Mouse-parallax layer holding the floating orbs */
@@ -195,7 +191,8 @@
 
 /* Scroll-linked hero wrapper */
 .hero-scroll {
-  will-change: transform, opacity;
+  position: relative;
+  z-index: 2;
 }
 
 /* Rotating word enter */
@@ -572,20 +569,20 @@
   background: linear-gradient(160deg, rgba(186, 255, 41, 0.03) 0%, transparent 70%);
 }
 
-/* Ghost outlined numeral */
+/* Service numeral */
 .svc-num {
   font-family: var(--font-display);
   font-size: var(--text-4xl);
   font-weight: 900;
   line-height: 1;
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.14);
-  transition: -webkit-text-stroke-color var(--t-base) var(--ease-out);
+  color: var(--color-lime);
+  opacity: 0.6;
+  transition: opacity var(--t-base) var(--ease-out);
   pointer-events: none;
 }
 
 .service-preview-card:hover .svc-num {
-  -webkit-text-stroke-color: var(--color-lime);
+  opacity: 1;
 }
 
 .svc-icon {
