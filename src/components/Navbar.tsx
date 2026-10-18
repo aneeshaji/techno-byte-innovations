@@ -104,16 +104,16 @@ const Navbar = () => {
       <nav className="header-main-nav" aria-label="Main Navigation">
         <div className="container header-nav-container">
           {/* Brand Logo & Authority Label */}
-          <Link to="/" className="header-brand" aria-label="TechnoByte Innovations Homepage">
+          <Link to="/" className="header-brand" aria-label="Technobyte Innovations Homepage">
             <div className="brand-logo-emblem">
-              <img src={technobyteLogo} alt="TechnoByte" className="brand-logo-img" />
+              <img src={technobyteLogo} alt="Technobyte Innovations" className="brand-logo-img" />
               <span className="brand-logo-glow" aria-hidden="true" />
             </div>
             <div className="brand-text-block">
               <span className="brand-title">
-                Techno<span className="brand-lime">Byte</span>
+                Technobyte <span className="brand-lime">Innovations</span>
               </span>
-              <span className="brand-tagline">ENTERPRISE SOFTWARE & AI</span>
+              <span className="brand-tagline">SOFTWARE & AI SOLUTIONS</span>
             </div>
           </Link>
 
@@ -206,7 +206,7 @@ const Navbar = () => {
               {/* Drawer Top */}
               <div className="mobile-drawer-header">
                 <div className="mobile-drawer-brand">
-                  <span className="brand-title">Techno<span className="brand-lime">Byte</span></span>
+                  <span className="brand-title">Technobyte <span className="brand-lime">Innovations</span></span>
                   <span className="status-micro">● Taking New Q2/Q3 Projects</span>
                 </div>
                 <button

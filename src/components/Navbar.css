@@ -129,38 +129,37 @@
 
 .brand-logo-emblem {
   position: relative;
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   border-radius: 12px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-  transition: transform var(--t-base) var(--ease-out), border-color var(--t-base) var(--ease-out);
+  filter: drop-shadow(0 4px 14px rgba(0, 210, 255, 0.35));
+  transition: transform var(--t-base) var(--ease-out);
 }
 
 .brand-logo-glow {
   position: absolute;
-  inset: -2px;
-  border-radius: 14px;
-  background: radial-gradient(circle, rgba(186, 255, 41, 0.35) 0%, transparent 70%);
+  inset: -4px;
+  border-radius: 16px;
+  background: radial-gradient(circle, rgba(0, 210, 255, 0.45) 0%, transparent 70%);
   opacity: 0;
   transition: opacity var(--t-base);
   pointer-events: none;
 }
 
 .brand-logo-img {
-  width: 26px;
-  height: 26px;
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
   position: relative;
   z-index: 1;
 }
 
 .header-brand:hover .brand-logo-emblem {
-  transform: scale(1.05) rotate(-2deg);
-  border-color: rgba(186, 255, 41, 0.5);
+  transform: scale(1.08);
 }
 
 .header-brand:hover .brand-logo-glow {
@@ -370,8 +369,8 @@
 .mobile-nav-backdrop {
   position: fixed;
   inset: 0;
-  z-index: calc(var(--z-nav) + 10);
-  background: rgba(2, 2, 5, 0.8);
+  z-index: 9999;
+  background: rgba(2, 2, 5, 0.85);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   display: flex;
@@ -571,6 +570,7 @@
 
   .mobile-menu-toggle {
     display: flex;
+    flex-shrink: 0;
   }
 
   .brand-tagline {
@@ -578,16 +578,53 @@
   }
 }
 
-@media (max-width: 480px) {
-  .btn-get-quote .btn-text {
-    font-size: 0.8rem;
+@media (max-width: 768px) {
+  /* Prevent horizontal squeeze from pushing the hamburger menu off-screen */
+  .header-action-group .btn-get-quote {
+    display: none;
   }
 
-  .btn-get-quote {
-    padding: 8px 14px;
+  .brand-title {
+    font-size: 1.1rem;
+  }
+
+  .mobile-menu-toggle {
+    display: flex;
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-nav-container {
+    gap: 8px;
+  }
+
+  .header-brand {
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .brand-logo-emblem {
+    width: 36px;
+    height: 36px;
+  }
+
+  .brand-logo-img {
+    width: 36px;
+    height: 36px;
+  }
+
+  .brand-title {
+    font-size: 0.98rem;
   }
 
   .nav-icon-action.whatsapp {
-    padding: 8px 10px;
+    padding: 7px 10px;
+    font-size: 0.8rem;
+  }
+
+  .mobile-menu-toggle {
+    width: 38px;
+    height: 38px;
   }
 }

@@ -34,11 +34,11 @@ const Footer = () => {
           <div className="footer-grid">
             {/* Brand */}
             <div className="footer-brand">
-              <Link to="/" className="footer-logo" aria-label="TechnoByteInnovations Home">
-                <img src={technobyteLogo} alt="TechnoByte Logo" className="footer-logo-image" />
+              <Link to="/" className="footer-logo" aria-label="Technobyte Innovations Home">
+                <img src={technobyteLogo} alt="Technobyte Innovations" className="footer-logo-image" />
                 <span className="footer-logo-text">
-                  <span className="footer-logo-wordmark">Techno<span>Byte</span></span>
-                  <span className="footer-logo-tagline">Innovations</span>
+                  <span className="footer-logo-wordmark">Technobyte <span>Innovations</span></span>
+                  <span className="footer-logo-tagline">Software & AI Engineering</span>
                 </span>
               </Link>
               <p className="footer-brand-desc">

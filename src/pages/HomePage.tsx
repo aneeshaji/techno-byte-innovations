@@ -409,7 +409,7 @@ const HomePage = () => {
     <div className="home-page">
       <SEO
         title="Top Software & AI Development Company in Kerala | Web & Mobile Apps"
-        description="TechnoByte Innovations delivers enterprise-grade software development in Trivandrum, Kerala. Custom web apps, mobile applications, cloud solutions, and AI/ML systems. 50+ projects delivered with 100% on-time guarantee. Request a free estimate."
+        description="Technobyte Innovations delivers enterprise-grade software development in Trivandrum, Kerala. Custom web apps, mobile applications, cloud solutions, and AI/ML systems. 50+ projects delivered with 100% on-time guarantee. Request a free estimate."
         canonicalUrl="/"
         keywords="software development company Kerala, web development Trivandrum, mobile app development India, AI ML solutions Kerala, custom software developers, hire react developers India, enterprise ERP CRM developers"
         schema={homePageSchema}

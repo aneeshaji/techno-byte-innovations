@@ -14,7 +14,7 @@ interface SEOProps {
 const SEO = ({
     title,
     description,
-    keywords = 'software development, web development, mobile apps, cloud solutions, AI, machine learning, TechnoByteInnovations, Trivandrum, Kerala',
+    keywords = 'software development, web development, mobile apps, cloud solutions, AI, machine learning, Technobyte Innovations, Trivandrum, Kerala',
     canonicalUrl,
     ogImage = '/logo.png',
     ogType = 'website',
