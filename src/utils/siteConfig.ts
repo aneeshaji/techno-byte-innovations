@@ -3,7 +3,7 @@
  * Used across the site for display and for SEO structured data.
  */
 
-export const SITE_NAME = 'TechnoByteInnovations';
+export const SITE_NAME = 'Technobyte Innovations';
 export const SITE_URL = 'https://technobyteinnovations.in';
 export const SITE_TAGLINE = 'Software Development Company in Trivandrum, Kerala';
 export const SITE_DESCRIPTION =

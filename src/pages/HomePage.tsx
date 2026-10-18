@@ -79,7 +79,7 @@ interface ProjectItem {
   featured?: boolean;
   impact: string;
   badge: string;
-  previewType: 'atsense' | 'framezlabs' | 'balancely' | 'erp' | 'paperstall';
+  previewType: 'atsense' | 'framezlabs' | 'balancely' | 'erp' | 'paperstall' | 'temple';
 }
 
 const projects: ProjectItem[] = [
@@ -103,6 +103,16 @@ const projects: ProjectItem[] = [
     impact: '10,000+ Orders Shipped Pan-India',
     badge: 'High-Volume D2C',
     previewType: 'framezlabs',
+  },
+  {
+    title: 'Thurayilkunnu Temple',
+    cat: 'Cultural · Digital Heritage',
+    blurb: 'Official digital heritage portal and online vazhipadu booking platform for Thurayilkunnu Sree Subrahmanya Swami Temple, serving devotees globally with darshan schedules and seva offerings.',
+    tech: ['React', 'PWA', 'Cloud', 'PostgreSQL'],
+    url: 'https://thurayilkunnutemple.com/',
+    impact: 'Online Darshan & Seva Booking · 10,000+ Devotees',
+    badge: 'Cultural Heritage Portal',
+    previewType: 'temple',
   },
   {
     title: 'Balancely CRM',
@@ -264,6 +274,39 @@ const ProjectMockup = ({ type }: { type: string }) => {
           </div>
           <div className="erp-efficiency">
             <span>Dispatch Readiness: <strong>99.4% On-Schedule</strong></span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (type === 'temple') {
+    return (
+      <div className="mockup-window">
+        <div className="mockup-header">
+          <div className="window-dots" aria-hidden="true">
+            <span className="dot red" />
+            <span className="dot yellow" />
+            <span className="dot green" />
+          </div>
+          <span className="mockup-url">thurayilkunnutemple.com</span>
+          <span className="mockup-badge">● Darshan Portal Live</span>
+        </div>
+        <div className="mockup-body mockup-temple">
+          <div className="temple-header-row">
+            <span className="temple-diety-icon">🛕</span>
+            <div>
+              <div className="temple-name-title">Thurayilkunnu Sree Subrahmanya Swami Temple</div>
+              <div className="temple-loc-tag">Karunagappally, Kollam, Kerala</div>
+            </div>
+          </div>
+          <div className="temple-darshan-badge">
+            <span>Darshan: <strong>05:00 AM – 10:30 AM</strong> · <strong>05:30 PM – 08:00 PM</strong></span>
+          </div>
+          <div className="temple-services-strip">
+            <span className="seva-pill">Ganapathy Homam</span>
+            <span className="seva-pill">Subrahmanya Pooja</span>
+            <span className="seva-pill online">✓ Online Vazhipadu Active</span>
           </div>
         </div>
       </div>

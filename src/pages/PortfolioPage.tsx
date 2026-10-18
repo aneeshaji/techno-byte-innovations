@@ -59,6 +59,15 @@ const projects = [
     url: 'https://erp.framezlabs.store/',
   },
   {
+    title: 'Thurayilkunnu Temple',
+    desc: 'Official digital heritage portal and online vazhipadu booking platform for Thurayilkunnu Sree Subrahmanya Swami Temple, serving devotees globally.',
+    tech: ['React', 'PWA', 'Cloud'],
+    category: 'web',
+    cat: 'Web',
+    gradient: 'linear-gradient(135deg, #ff9a44 0%, #fc6076 100%)',
+    url: 'https://thurayilkunnutemple.com/',
+  },
+  {
     title: 'Paperstall',
     desc: 'A reading destination where sellers and readers connect to discover and shop their next great book.',
     tech: ['React', 'Node.js', 'PostgreSQL'],
