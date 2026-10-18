@@ -24,7 +24,13 @@
 }
 
 .portfolio-page {
-  padding-top: 80px;
+  padding-top: 112px;
+}
+
+@media (max-width: 900px) {
+  .portfolio-page {
+    padding-top: 76px;
+  }
 }
 
 /* ── Filter Bar ── */

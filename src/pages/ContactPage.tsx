@@ -67,20 +67,18 @@ const ContactPage = () => {
       _subject: 'New enquiry — technobyteinnovations.in',
     };
 
-    if (FORMSPREE_ENDPOINT) {
-      try {
-        const res = await fetch(FORMSPREE_ENDPOINT, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify(payload),
-        });
-        if (!res.ok) throw new Error(`Form submission failed (${res.status})`);
-        setStatus('success');
-      } catch {
-        setStatus('error');
-      }
-    } else {
-      // Fallback: open the visitor's mail client pre-addressed to the inbox.
+    const endpoint = FORMSPREE_ENDPOINT || `https://formsubmit.co/ajax/${CONTACT_EMAIL}`;
+
+    try {
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error(`Form submission failed (${res.status})`);
+      setStatus('success');
+    } catch {
+      // Fallback: open visitor's mail client if network fails
       const subject = encodeURIComponent(`New enquiry from ${formData.name || 'website visitor'}`);
       const body = encodeURIComponent(
         `Name: ${formData.name}\nEmail: ${formData.email}\nCompany: ${formData.company}\n\n${formData.message}`

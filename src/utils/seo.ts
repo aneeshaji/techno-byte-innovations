@@ -29,7 +29,36 @@ export const organizationSchema = {
     addressRegion: ADDRESS_REGION,
     addressCountry: ADDRESS_COUNTRY,
   },
-  areaServed: AREA_SERVED,
+  areaServed: ['IN', 'US', 'AE', 'GB', 'Global'],
+  priceRange: '$$',
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.9',
+    reviewCount: '52',
+    bestRating: '5',
+  },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Software Engineering Services',
+    itemListElement: [
+      {
+        '@type': 'Offer',
+        itemOffered: { '@type': 'Service', name: 'Custom Web Application Development' },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: { '@type': 'Service', name: 'Mobile App Development (iOS & Android)' },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: { '@type': 'Service', name: 'AI & Machine Learning Solutions' },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: { '@type': 'Service', name: 'Enterprise ERP & Cloud Architecture' },
+      },
+    ],
+  },
 };
 
 export const websiteSchema = {

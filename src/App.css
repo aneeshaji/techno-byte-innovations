@@ -23,7 +23,7 @@ main {
 
 /* Smooth scroll offset for fixed navbar */
 section {
-  scroll-margin-top: 80px;
+  scroll-margin-top: 112px;
 }
 
 /* Loading animation for initial page load */

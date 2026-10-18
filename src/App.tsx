@@ -14,6 +14,8 @@ import PortfolioPage from './pages/PortfolioPage';
 import ContactPage from './pages/ContactPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import TermsOfServicePage from './pages/TermsOfServicePage';
+import { LeadModalProvider } from './context/LeadModalContext';
+import LeadModal from './components/LeadModal';
 import './App.css';
 
 function AnimatedRoutes() {
@@ -37,17 +39,20 @@ function AnimatedRoutes() {
 function App() {
   return (
     <Router>
-      <Analytics />
-      <ScrollToTop />
-      <WhatsAppButton />
-      <div className="app">
-        <ScrollProgressBar />
-        <Navbar />
-        <main>
-          <AnimatedRoutes />
-        </main>
-        <Footer />
-      </div>
+      <LeadModalProvider>
+        <Analytics />
+        <ScrollToTop />
+        <WhatsAppButton />
+        <LeadModal />
+        <div className="app">
+          <ScrollProgressBar />
+          <Navbar />
+          <main>
+            <AnimatedRoutes />
+          </main>
+          <Footer />
+        </div>
+      </LeadModalProvider>
     </Router>
   );
 }

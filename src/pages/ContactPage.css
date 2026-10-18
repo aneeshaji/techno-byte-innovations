@@ -1,5 +1,11 @@
 .contact-page {
-  padding-top: 80px;
+  padding-top: 112px;
+}
+
+@media (max-width: 900px) {
+  .contact-page {
+    padding-top: 76px;
+  }
 }
 
 /* ── Contact Split ── */

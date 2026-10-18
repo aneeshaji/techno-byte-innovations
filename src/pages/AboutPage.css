@@ -1,5 +1,11 @@
 .about-page {
-  padding-top: 80px;
+  padding-top: 112px;
+}
+
+@media (max-width: 900px) {
+  .about-page {
+    padding-top: 76px;
+  }
 }
 
 /* ── Story Section ── */
