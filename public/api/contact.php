@@ -198,6 +198,14 @@ function send_via_smtp($to, $subject, $body, $headersArray, $smtp) {
     return true;
 }
 
+// Helper to encode headers containing non-ASCII characters (RFC 2047)
+function rfc2047_encode($str) {
+    if (preg_match('/[^\x20-\x7E]/', $str)) {
+        return '=?UTF-8?B?' . base64_encode($str) . '?=';
+    }
+    return $str;
+}
+
 // -----------------------------------------------------------------------------
 // Unified Email Sender (SMTP primary → mail() fallback)
 // -----------------------------------------------------------------------------
@@ -206,35 +214,44 @@ function send_email_dispatch($to, $subject, $textBody, $htmlBody, $replyToEmail,
 
     $boundary = "==Part_" . md5(uniqid(microtime(), true));
 
+    // RFC 2047 header encoding for UTF-8 support
+    $encodedSubject = rfc2047_encode($subject);
+    $encodedFromName = rfc2047_encode($fromName);
+    $encodedReplyName = !empty($replyToName) ? rfc2047_encode(str_replace(['"', '\\'], '', $replyToName)) : '';
+
     // Build headers array
     $msgId = '<' . time() . '.' . md5(uniqid(microtime(), true)) . '@technobyteinnovations.in>';
     $headers = [
         'Date: ' . date('r'),
         'Message-ID: ' . $msgId,
         'MIME-Version: 1.0',
-        'From: ' . $fromName . ' <' . $fromEmail . '>',
-        'Reply-To: ' . (!empty($replyToName) ? str_replace(['"', '\\'], '', $replyToName) . ' ' : '') . '<' . $replyToEmail . '>',
+        'From: ' . $encodedFromName . ' <' . $fromEmail . '>',
+        'Reply-To: ' . (!empty($encodedReplyName) ? $encodedReplyName . ' ' : '') . '<' . $replyToEmail . '>',
         'Return-Path: <' . $fromEmail . '>',
         'X-Mailer: TBI-ContactForm/2.0',
         'X-Priority: 1',
         'Content-Type: multipart/alternative; boundary="' . $boundary . '"'
     ];
 
-    // Build multipart body (Plain Text + HTML)
+    // RFC 2045: Encode body parts as base64 chunked at 76 chars to prevent
+    // Exim "message has lines too long for transport (limit 2048)" bounces
+    $textEncoded = chunk_split(base64_encode($textBody), 76, "\r\n");
+    $htmlEncoded = chunk_split(base64_encode($htmlBody), 76, "\r\n");
+
     $fullBody  = "--{$boundary}\r\n";
     $fullBody .= "Content-Type: text/plain; charset=UTF-8\r\n";
-    $fullBody .= "Content-Transfer-Encoding: 8bit\r\n\r\n";
-    $fullBody .= $textBody . "\r\n\r\n";
+    $fullBody .= "Content-Transfer-Encoding: base64\r\n\r\n";
+    $fullBody .= $textEncoded . "\r\n";
     $fullBody .= "--{$boundary}\r\n";
     $fullBody .= "Content-Type: text/html; charset=UTF-8\r\n";
-    $fullBody .= "Content-Transfer-Encoding: 8bit\r\n\r\n";
-    $fullBody .= $htmlBody . "\r\n\r\n";
+    $fullBody .= "Content-Transfer-Encoding: base64\r\n\r\n";
+    $fullBody .= $htmlEncoded . "\r\n";
     $fullBody .= "--{$boundary}--";
 
     // ── Method 1: Authenticated SMTP (most reliable on cPanel) ──
     if ($useSmtp && !empty($smtpConfig['host']) && !empty($smtpConfig['password'])) {
-        write_log("Dispatch: Trying SMTP as primary method...");
-        $smtpResult = send_via_smtp($to, $subject, $fullBody, $headers, $smtpConfig);
+        write_log("Dispatch: Trying SMTP as primary method for {$to}...");
+        $smtpResult = send_via_smtp($to, $encodedSubject, $fullBody, $headers, $smtpConfig);
         if ($smtpResult) return true;
         write_log("Dispatch: SMTP failed, falling back to native mail()...");
     } elseif ($useSmtp) {
@@ -253,12 +270,12 @@ function send_email_dispatch($to, $subject, $textBody, $htmlBody, $replyToEmail,
     $headersCombined = implode("\r\n", $mailHeaders);
 
     write_log("Dispatch: Sending via native mail() to {$to} with -f{$cleanFrom}");
-    $sent = @mail($to, $subject, $fullBody, $headersCombined, $additionalParams);
+    $sent = @mail($to, $encodedSubject, $fullBody, $headersCombined, $additionalParams);
 
     if (!$sent) {
         // Try without -f parameter (some hosts block it)
         write_log("Dispatch: mail() with -f failed, retrying without -f...");
-        $sent = @mail($to, $subject, $fullBody, $headersCombined);
+        $sent = @mail($to, $encodedSubject, $fullBody, $headersCombined);
     }
 
     if (!$sent) {
