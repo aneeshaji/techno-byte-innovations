@@ -205,11 +205,6 @@ const ContactPage = () => {
                 </div>
               </motion.div>
 
-              <motion.div className="social-row" variants={fadeUp} custom={2}>
-                <a href="#" className="social-item" aria-label="LinkedIn">in</a>
-                <a href="#" className="social-item" aria-label="Twitter">𝕏</a>
-                <a href="#" className="social-item" aria-label="GitHub">⌥</a>
-              </motion.div>
             </motion.div>
 
             {/* Right: Form */}

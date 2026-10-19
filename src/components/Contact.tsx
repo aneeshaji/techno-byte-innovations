@@ -46,20 +46,6 @@ const Contact = () => {
                             <h3>Visit Us</h3>
                             <p>Trivandrum, Kerala, India</p>
                         </div>
-                        <div className="social-links">
-                            <a href="#" className="social-link glass" aria-label="LinkedIn">
-                                <span>💼</span>
-                            </a>
-                            <a href="#" className="social-link glass" aria-label="Twitter">
-                                <span>🐦</span>
-                            </a>
-                            <a href="#" className="social-link glass" aria-label="GitHub">
-                                <span>💻</span>
-                            </a>
-                            <a href="#" className="social-link glass" aria-label="Facebook">
-                                <span>📘</span>
-                            </a>
-                        </div>
                     </div>
 
                     <form className="contact-form glass" onSubmit={handleSubmit}>
