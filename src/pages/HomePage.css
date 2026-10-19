@@ -1,11 +1,11 @@
 /* ── Page wrapper — matches fixed header height with top utility bar ── */
 .home-page {
-  padding-top: 112px;
+  padding-top: 86px;
 }
 
 @media (max-width: 900px) {
   .home-page {
-    padding-top: 76px;
+    padding-top: 72px;
   }
 }
 
@@ -14,12 +14,13 @@
    ========================================================= */
 
 .hero {
-  min-height: 100vh;
+  min-height: calc(100vh - 86px);
   display: flex;
   align-items: center;
   position: relative;
   overflow: hidden;
-  padding: var(--sp-24) 0 var(--sp-16);
+  padding: 16px 0 24px;
+  box-sizing: border-box;
 }
 
 .hero-glow {
@@ -89,15 +90,15 @@
 
 .hero-inner {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--sp-16);
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: var(--sp-8);
   align-items: center;
 }
 
 @media (max-width: 900px) {
   .hero-inner {
     grid-template-columns: 1fr;
-    gap: var(--sp-12);
+    gap: var(--sp-8);
   }
 }
 
@@ -112,10 +113,10 @@
   align-items: center;
   gap: var(--sp-2);
   background: rgba(186,255,41,0.08);
-  border: 1px solid rgba(186,255,41,0.2);
+  border: 1px solid rgba(186,255,41,0.25);
   border-radius: var(--r-full);
-  padding: var(--sp-2) var(--sp-4);
-  margin-bottom: var(--sp-6);
+  padding: 4px 12px;
+  margin-bottom: 12px;
 }
 
 .hero-badge-dot {
@@ -128,30 +129,31 @@
 
 .hero-badge-text {
   font-family: var(--font-mono);
-  font-size: var(--text-xs);
+  font-size: 0.78rem;
+  font-weight: 600;
   color: var(--color-lime);
   letter-spacing: 0.08em;
 }
 
 .hero-title {
   font-family: var(--font-display);
-  font-size: var(--text-6xl);
-  font-weight: 900;
-  letter-spacing: -0.04em;
-  line-height: 0.95;
+  font-size: clamp(2.35rem, 1.9rem + 1.6vw, 3.25rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
   color: var(--color-text);
-  margin-bottom: var(--sp-6);
+  margin-bottom: var(--sp-4);
 }
 
 .hero-eyebrow-lead {
   display: block;
   font-family: var(--font-mono);
-  font-size: clamp(0.85rem, 0.8rem + 0.3vw, 1.05rem);
-  font-weight: 600;
+  font-size: 0.84rem;
+  font-weight: 700;
   color: var(--color-lime);
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  margin-bottom: var(--sp-3);
+  margin-bottom: 8px;
   line-height: 1.3;
 }
 
@@ -219,11 +221,11 @@
 }
 
 .hero-desc {
-  font-size: var(--text-lg);
+  font-size: 1rem;
   color: var(--color-text-2);
-  line-height: 1.65;
-  max-width: 520px;
-  margin-bottom: var(--sp-6);
+  line-height: 1.62;
+  max-width: 540px;
+  margin-bottom: var(--sp-4);
 }
 
 /* ── Trust checklist pill row ── */
@@ -231,15 +233,16 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-bottom: var(--sp-8);
+  margin-bottom: var(--sp-5);
 }
 
 .trust-pill-check {
   font-family: var(--font-mono);
-  font-size: 0.76rem;
+  font-size: 0.78rem;
+  font-weight: 500;
   color: var(--color-text-2);
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 5px 12px;
   border-radius: var(--r-full);
 }
@@ -254,6 +257,9 @@
 .hero-cta-lead {
   border: none;
   cursor: pointer;
+  padding: 12px 24px;
+  font-size: 0.94rem;
+  font-weight: 700;
   box-shadow: 0 8px 30px rgba(186, 255, 41, 0.35);
 }
 
@@ -261,6 +267,8 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  padding: 12px 22px;
+  font-size: 0.9rem;
   background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
   color: #ffffff;
   border-radius: var(--r-full);
@@ -299,19 +307,19 @@
   -webkit-backdrop-filter: blur(28px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 20px;
-  padding: 28px 26px;
+  padding: 24px 24px 20px;
   box-shadow:
     0 24px 60px rgba(0, 0, 0, 0.7),
     inset 0 1px 0 rgba(255, 255, 255, 0.12);
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 14px;
 }
 
 .lead-card-header {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
 }
 
 .lead-card-tag {
@@ -340,7 +348,7 @@
 .lead-card-sub {
   font-size: 0.84rem;
   color: var(--color-text-2);
-  line-height: 1.5;
+  line-height: 1.45;
 }
 
 .lead-card-options {
@@ -353,13 +361,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 16px;
-  border-radius: 12px;
+  padding: 10px 14px;
+  border-radius: 10px;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
   color: var(--color-text);
   font-family: var(--font-display);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 600;
   cursor: pointer;
   transition: all var(--t-fast) var(--ease-out);
@@ -386,8 +394,8 @@
 .lead-card-stats {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 12px;
-  padding-top: 16px;
+  gap: 10px;
+  padding-top: 14px;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   text-align: center;
 }
@@ -408,19 +416,19 @@
 /* Scroll-down indicator */
 .hero-scroll-hint {
   position: absolute;
-  bottom: var(--sp-10);
+  bottom: 12px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--sp-2);
+  gap: 5px;
   z-index: 2;
 }
 
 .hero-scroll-mouse {
-  width: 22px;
-  height: 34px;
+  width: 20px;
+  height: 30px;
   border: 2px solid var(--color-text-3);
   border-radius: var(--r-full);
   position: relative;
@@ -429,10 +437,10 @@
 .hero-scroll-mouse::after {
   content: '';
   position: absolute;
-  top: 6px;
+  top: 5px;
   left: 50%;
   width: 3px;
-  height: 7px;
+  height: 6px;
   border-radius: var(--r-full);
   background: var(--color-lime);
   transform: translateX(-50%);
@@ -441,9 +449,9 @@
 
 .hero-scroll-text {
   font-family: var(--font-mono);
-  font-size: var(--text-xs);
+  font-size: 0.68rem;
   color: var(--color-text-3);
-  letter-spacing: 0.2em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
 }
 
@@ -530,20 +538,20 @@
    ========================================================= */
 
 .services-preview {
-  padding: var(--sp-32) 0;
+  padding: var(--sp-16) 0;
 }
 
 .services-header {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  margin-bottom: var(--sp-16);
-  gap: var(--sp-8);
+  margin-bottom: var(--sp-8);
+  gap: var(--sp-6);
   flex-wrap: wrap;
 }
 
 .services-heading {
-  font-size: var(--text-5xl);
+  font-size: var(--text-4xl);
   font-weight: 900;
   letter-spacing: -0.03em;
   line-height: 1;
@@ -643,7 +651,7 @@
    ========================================================= */
 
 .projects-section {
-  padding: var(--sp-32) 0;
+  padding: var(--sp-16) 0;
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
 }
@@ -652,22 +660,13 @@
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  margin-bottom: var(--sp-16);
-  gap: var(--sp-8);
-  flex-wrap: wrap;
-}
-
-.projects-header {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  margin-bottom: var(--sp-12);
-  gap: var(--sp-8);
+  margin-bottom: var(--sp-8);
+  gap: var(--sp-6);
   flex-wrap: wrap;
 }
 
 .projects-heading {
-  font-size: var(--text-5xl);
+  font-size: var(--text-4xl);
   font-weight: 900;
   letter-spacing: -0.03em;
   line-height: 1.08;
@@ -692,15 +691,15 @@
   display: grid;
   grid-template-columns: 1.1fr 1fr;
   align-items: center;
-  gap: var(--sp-12);
+  gap: var(--sp-8);
   background: linear-gradient(145deg, rgba(16, 16, 26, 0.95) 0%, rgba(10, 10, 16, 0.98) 100%);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 28px;
-  padding: 44px 44px;
+  border-radius: 20px;
+  padding: 30px 32px;
   box-shadow:
     0 24px 60px rgba(0, 0, 0, 0.65),
     inset 0 1px 0 rgba(255, 255, 255, 0.15);
-  margin-bottom: 32px;
+  margin-bottom: 24px;
   transition: all var(--t-base) var(--ease-out);
 }
 
@@ -1488,13 +1487,13 @@
    ========================================================= */
 
 .why-section {
-  padding: var(--sp-32) 0;
+  padding: var(--sp-16) 0;
 }
 
 .why-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--sp-16);
+  gap: var(--sp-8);
   align-items: start;
 }
 
@@ -1503,18 +1502,18 @@
 }
 
 .why-left h2 {
-  font-size: var(--text-5xl);
+  font-size: var(--text-4xl);
   font-weight: 900;
   letter-spacing: -0.03em;
   line-height: 1;
-  margin-bottom: var(--sp-8);
+  margin-bottom: var(--sp-6);
 }
 
 .why-left p {
-  font-size: var(--text-lg);
+  font-size: var(--text-base);
   color: var(--color-text-2);
   max-width: 440px;
-  margin-bottom: var(--sp-8);
+  margin-bottom: var(--sp-6);
 }
 
 .why-features {

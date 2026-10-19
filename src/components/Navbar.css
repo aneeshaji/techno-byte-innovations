@@ -16,9 +16,9 @@
   background: #06060a;
   background: linear-gradient(90deg, rgba(8, 8, 14, 0.98) 0%, rgba(14, 14, 22, 0.98) 100%);
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  padding: 6px 0;
+  padding: 4px 0;
   font-family: var(--font-mono);
-  font-size: 0.74rem;
+  font-size: 0.71rem;
   color: var(--color-text-2);
   transition: all var(--t-base) var(--ease-out);
 }
@@ -100,13 +100,13 @@
   backdrop-filter: blur(24px) saturate(160%);
   -webkit-backdrop-filter: blur(24px) saturate(160%);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 12px 0;
+  padding: 8px 0;
   transition: all var(--t-base) var(--ease-out);
 }
 
 .site-header.scrolled .header-main-nav {
   background: rgba(6, 6, 10, 0.96);
-  padding: 9px 0;
+  padding: 6px 0;
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.65);
   border-bottom-color: rgba(186, 255, 41, 0.15);
 }
@@ -129,9 +129,9 @@
 
 .brand-logo-emblem {
   position: relative;
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
   background: transparent;
   display: flex;
   align-items: center;
@@ -143,7 +143,7 @@
 .brand-logo-glow {
   position: absolute;
   inset: -4px;
-  border-radius: 16px;
+  border-radius: 14px;
   background: radial-gradient(circle, rgba(0, 210, 255, 0.45) 0%, transparent 70%);
   opacity: 0;
   transition: opacity var(--t-base);
@@ -151,8 +151,8 @@
 }
 
 .brand-logo-img {
-  width: 42px;
-  height: 42px;
+  width: 36px;
+  height: 36px;
   object-fit: contain;
   position: relative;
   z-index: 1;
@@ -246,11 +246,11 @@
 .nav-icon-action {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 8px 14px;
-  border-radius: 10px;
+  gap: 5px;
+  padding: 6px 12px;
+  border-radius: 8px;
   font-family: var(--font-display);
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 600;
   text-decoration: none;
   transition: all var(--t-fast) var(--ease-out);
@@ -285,14 +285,14 @@
 .btn-get-quote {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 9px 20px;
-  border-radius: 10px;
+  gap: 6px;
+  padding: 7px 16px;
+  border-radius: 8px;
   background: linear-gradient(135deg, #c9ff44 0%, #52e500 100%);
   color: #060608;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   letter-spacing: -0.01em;
   border: none;
   cursor: pointer;

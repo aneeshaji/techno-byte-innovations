@@ -1,20 +1,20 @@
 .legal-page {
     min-height: 100vh;
-    padding-top: 112px;
+    padding-top: 86px;
 }
 
 @media (max-width: 900px) {
     .legal-page {
-        padding-top: 76px;
+        padding-top: 72px;
     }
 }
 
 .legal-content {
-    padding: 4rem 0;
+    padding: 2rem 0;
 }
 
 .legal-content .content-box {
-    padding: 3rem;
+    padding: 2rem;
     max-width: 900px;
     margin: 0 auto;
     line-height: 1.8;

@@ -1,22 +1,22 @@
 .contact-page {
-  padding-top: 112px;
+  padding-top: 86px;
 }
 
 @media (max-width: 900px) {
   .contact-page {
-    padding-top: 76px;
+    padding-top: 72px;
   }
 }
 
 /* ── Contact Split ── */
 .contact-section {
-  padding: var(--sp-24) 0;
+  padding: var(--sp-8) 0 var(--sp-12);
 }
 
 .contact-split {
   display: grid;
   grid-template-columns: 1fr 1.3fr;
-  gap: var(--sp-16);
+  gap: var(--sp-8);
   align-items: start;
 }
 
@@ -26,27 +26,27 @@
 
 /* Left info */
 .contact-left h2 {
-  font-size: var(--text-5xl);
+  font-size: var(--text-4xl);
   font-weight: 900;
   letter-spacing: -0.03em;
-  line-height: 1;
-  margin-bottom: var(--sp-6);
+  line-height: 1.1;
+  margin-bottom: var(--sp-4);
 }
 
 .contact-left h2 span { color: var(--color-lime); }
 
 .contact-lead {
-  font-size: var(--text-lg);
+  font-size: var(--text-base);
   color: var(--color-text-2);
-  line-height: 1.7;
-  margin-bottom: var(--sp-10);
+  line-height: 1.65;
+  margin-bottom: var(--sp-6);
 }
 
 .contact-details {
   display: flex;
   flex-direction: column;
   gap: var(--sp-4);
-  margin-bottom: var(--sp-10);
+  margin-bottom: var(--sp-6);
 }
 
 .contact-detail-row {
@@ -216,7 +216,7 @@
 
 /* ── FAQ ── */
 .faq-section {
-  padding: var(--sp-24) 0;
+  padding: var(--sp-12) 0;
   border-top: 1px solid var(--color-border);
 }
 
@@ -224,7 +224,7 @@
   font-size: var(--text-4xl);
   font-weight: 900;
   letter-spacing: -0.03em;
-  margin-bottom: var(--sp-12);
+  margin-bottom: var(--sp-6);
 }
 
 .faq-heading span { color: var(--color-lime); }
