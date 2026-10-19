@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import Magnetic from '../components/Magnetic';
 import PageHero from '../components/PageHero';
-import { portfolioPageSchema } from '../utils/seo';
+import { portfolioPageSchema, breadcrumbSchema } from '../utils/seo';
 import './PortfolioPage.css';
 
 const fadeUp: Variants = {
@@ -93,11 +93,17 @@ const PortfolioPage = () => {
   return (
     <div className="portfolio-page">
       <SEO
-        title="Our Portfolio — Successful Projects & Case Studies"
-        description="Explore our portfolio of successful projects including web applications, mobile apps, e-commerce solutions, and enterprise software. See how we've helped businesses transform with technology."
+        title="Software Development Case Studies & Portfolio | Technobyte Innovations"
+        description="Explore custom software development case studies, web applications, mobile apps, and enterprise AI systems built by Technobyte Innovations in Trivandrum, Kerala."
         canonicalUrl="/portfolio"
-        keywords="software projects Kerala, web development portfolio, mobile app projects, technology case studies"
-        schema={portfolioPageSchema(projects)}
+        keywords="software development case studies, web development portfolio Kerala, mobile app case studies, IT project portfolio Trivandrum, custom software projects India"
+        schema={{
+          '@context': 'https://schema.org',
+          '@graph': [
+            portfolioPageSchema(projects),
+            breadcrumbSchema([{ name: 'Portfolio', url: '/portfolio' }]),
+          ],
+        }}
       />
 
       {/* Hero */}

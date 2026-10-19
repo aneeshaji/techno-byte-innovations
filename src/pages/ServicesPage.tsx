@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import Magnetic from '../components/Magnetic';
 import PageHero from '../components/PageHero';
-import { servicesPageSchema } from '../utils/seo';
+import { servicesPageSchema, breadcrumbSchema } from '../utils/seo';
 import './ServicesPage.css';
 
 const fadeUp: Variants = {
@@ -65,11 +65,17 @@ const ServicesPage = () => {
   return (
     <div className="services-page">
       <SEO
-        title="Web, Mobile, Cloud & AI Development Services"
-        description="Expert software development services including custom web development, mobile apps, cloud solutions, AI/ML integration, and DevOps. Professional technology solutions in Trivandrum, Kerala."
+        title="Software Development Services in Kerala | Web, Mobile & AI Solutions"
+        description="Enterprise software development services in Trivandrum, Kerala. Custom web applications, iOS/Android mobile apps, cloud infrastructure, and AI/ML engineering. Fixed-price contracts & on-time delivery."
         canonicalUrl="/services"
-        keywords="web development services, mobile app development, cloud computing services, AI ML development, DevOps services Kerala"
-        schema={servicesPageSchema(services)}
+        keywords="software development services Kerala, web development company Trivandrum, mobile app development Kerala, AI ML development India, hire dedicated developers Kerala, cloud computing services Trivandrum, custom software development agency"
+        schema={{
+          '@context': 'https://schema.org',
+          '@graph': [
+            servicesPageSchema(services),
+            breadcrumbSchema([{ name: 'Services', url: '/services' }]),
+          ],
+        }}
       />
 
       {/* Hero */}

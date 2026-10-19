@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import Magnetic from '../components/Magnetic';
 import PageHero from '../components/PageHero';
+import { breadcrumbSchema } from '../utils/seo';
 import './AboutPage.css';
 
 const fadeUp: Variants = {
@@ -36,10 +37,11 @@ const AboutPage = () => {
   return (
     <div className="about-page">
       <SEO
-        title="About Us — Your Digital Transformation Partner in Kerala"
-        description="Learn about TechnoByteInnovations — your trusted partner in digital transformation. We deliver innovative software solutions with expertise in web development, mobile apps, AI/ML, and cloud technologies in Kerala, India."
+        title="About Us | Top IT & Software Development Company in Trivandrum, Kerala"
+        description="Learn about Technobyte Innovations — a premier software development and technology consulting company in Trivandrum, Kerala. 50+ enterprise web platforms, mobile apps, and AI systems delivered globally."
         canonicalUrl="/about"
-        keywords="software company Kerala, IT company Trivandrum, technology consulting India, software development expertise, digital transformation Kerala"
+        keywords="software company Kerala, IT company Trivandrum, software developers Kerala, technology consulting India, software company Technopark Trivandrum, digital transformation Kerala"
+        schema={breadcrumbSchema([{ name: 'About Us', url: '/about' }])}
       />
 
       {/* Hero */}

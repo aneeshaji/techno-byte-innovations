@@ -14,23 +14,51 @@ import {
   SITE_URL,
 } from './siteConfig';
 
-/** Organization / ProfessionalService node. */
+/** Organization & LocalBusiness node with GeoCoordinates for local search ranking */
 export const organizationSchema = {
-  '@type': ['Organization', 'ProfessionalService'],
+  '@type': ['Organization', 'LocalBusiness', 'ProfessionalService'],
   name: SITE_NAME,
   url: SITE_URL,
   logo: `${SITE_URL}/logo.png`,
+  image: `${SITE_URL}/logo.png`,
   description: SITE_DESCRIPTION,
   email: CONTACT_EMAIL,
   telephone: PHONE_E164,
+  priceRange: '$$',
+  currenciesAccepted: 'INR, USD, AED, EUR, GBP',
+  paymentAccepted: 'Credit Card, Bank Transfer, UPI, Wire Transfer',
   address: {
     '@type': 'PostalAddress',
+    streetAddress: 'Technopark / Trivandrum',
     addressLocality: ADDRESS_LOCALITY,
     addressRegion: ADDRESS_REGION,
+    postalCode: '695581',
     addressCountry: ADDRESS_COUNTRY,
   },
-  areaServed: ['IN', 'US', 'AE', 'GB', 'Global'],
-  priceRange: '$$',
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 8.5241,
+    longitude: 76.9366,
+  },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '09:00',
+      closes: '18:00',
+    },
+  ],
+  areaServed: [
+    { '@type': 'AdministrativeArea', name: 'Kerala' },
+    { '@type': 'Country', name: 'India' },
+    { '@type': 'Country', name: 'United States' },
+    { '@type': 'Country', name: 'United Arab Emirates' },
+    { '@type': 'Country', name: 'United Kingdom' },
+  ],
+  sameAs: [
+    'https://wa.me/919995064344',
+    'https://github.com/aneeshaji',
+  ],
   aggregateRating: {
     '@type': 'AggregateRating',
     ratingValue: '4.9',
@@ -43,19 +71,19 @@ export const organizationSchema = {
     itemListElement: [
       {
         '@type': 'Offer',
-        itemOffered: { '@type': 'Service', name: 'Custom Web Application Development' },
+        itemOffered: { '@type': 'Service', name: 'Custom Web Application Development', description: 'Enterprise SaaS platforms, portals, and cloud web applications built with React, Node, and Python.' },
       },
       {
         '@type': 'Offer',
-        itemOffered: { '@type': 'Service', name: 'Mobile App Development (iOS & Android)' },
+        itemOffered: { '@type': 'Service', name: 'Mobile App Development (iOS & Android)', description: 'Native and cross-platform mobile apps built with React Native and Flutter.' },
       },
       {
         '@type': 'Offer',
-        itemOffered: { '@type': 'Service', name: 'AI & Machine Learning Solutions' },
+        itemOffered: { '@type': 'Service', name: 'AI & Machine Learning Solutions', description: 'Custom LLM integrations, predictive modeling, NLP pipelines, and computer vision systems.' },
       },
       {
         '@type': 'Offer',
-        itemOffered: { '@type': 'Service', name: 'Enterprise ERP & Cloud Architecture' },
+        itemOffered: { '@type': 'Service', name: 'Enterprise ERP & Cloud Architecture', description: 'Scalable cloud infrastructure on AWS, Azure, GCP with Kubernetes, Docker, and CI/CD pipelines.' },
       },
     ],
   },
@@ -115,4 +143,24 @@ export const portfolioPageSchema = (projects: { title: string; desc: string; url
     description: p.desc,
     url: p.url,
   })),
+});
+
+/** BreadcrumbList schema for inner pages to display hierarchical breadcrumbs in Google Search. */
+export const breadcrumbSchema = (crumbs: { name: string; url: string }[]) => ({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: SITE_URL,
+    },
+    ...crumbs.map((crumb, idx) => ({
+      '@type': 'ListItem',
+      position: idx + 2,
+      name: crumb.name,
+      item: `${SITE_URL}${crumb.url}`,
+    })),
+  ],
 });

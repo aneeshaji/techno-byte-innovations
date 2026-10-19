@@ -398,10 +398,10 @@ const HomePage = () => {
   return (
     <div className="home-page">
       <SEO
-        title="Top Software & AI Development Company in Kerala | Web & Mobile Apps"
-        description="Technobyte Innovations delivers enterprise-grade software development in Trivandrum, Kerala. Custom web apps, mobile applications, cloud solutions, and AI/ML systems. 50+ projects delivered with 100% on-time guarantee. Request a free estimate."
+        title="Top Software Development Company in Kerala & Trivandrum | Web & Mobile Apps"
+        description="Technobyte Innovations is the leading software development company in Trivandrum, Kerala. We build custom web apps, iOS/Android mobile apps, cloud architecture, and enterprise AI systems. 50+ delivered projects with 100% on-time guarantee. Request a free estimate."
         canonicalUrl="/"
-        keywords="software development company Kerala, web development Trivandrum, mobile app development India, AI ML solutions Kerala, custom software developers, hire react developers India, enterprise ERP CRM developers"
+        keywords="software development company Kerala, software company in Trivandrum, web development company Kerala, mobile app development Trivandrum, custom software development India, AI ML company Kerala, hire react developers India, hire flutter developers Kerala, enterprise software development India, Technopark software company"
         schema={homePageSchema}
       />
 
@@ -442,9 +442,10 @@ const HomePage = () => {
                 </motion.div>
 
                 <motion.h1 className="hero-title" variants={fadeUp} custom={1}>
-                  <span className="hero-line">Engineering Software That</span>
+                  <span className="hero-eyebrow-lead">Software Development Company in Kerala</span>
+                  <span className="hero-line">Engineering Digital Products That</span>
                   <span className="hero-line line-lime line-shine">
-                    Scales Your Revenue.
+                    Scale Your Business.
                   </span>
                 </motion.h1>
 

@@ -4,7 +4,7 @@ import SEO from '../components/SEO';
 import Magnetic from '../components/Magnetic';
 import PageHero from '../components/PageHero';
 import { CONTACT_EMAIL, PHONE_DISPLAY, PHONE_TEL, WHATSAPP_URL } from '../utils/siteConfig';
-import { faqPageSchema } from '../utils/seo';
+import { faqPageSchema, breadcrumbSchema } from '../utils/seo';
 import './ContactPage.css';
 
 /**
@@ -120,11 +120,17 @@ const ContactPage = () => {
   return (
     <div className="contact-page">
       <SEO
-        title="Contact Us — Start Your Project Today"
-        description="Get in touch with TechnoByteInnovations for your software development needs. Located in Trivandrum, Kerala. Contact us for web development, mobile apps, cloud solutions, and AI/ML services."
+        title="Contact Us | Hire Software Developers in Trivandrum, Kerala"
+        description="Connect with Technobyte Innovations in Trivandrum, Kerala. Request a free architecture overview and project estimate for web, mobile, and AI software engineering."
         canonicalUrl="/contact"
-        keywords="contact software company Kerala, IT services Trivandrum contact, software development inquiry"
-        schema={faqPageSchema(faqs)}
+        keywords="contact software company Kerala, hire developers Trivandrum, IT company Trivandrum contact, software development quotation Kerala, hire react flutter developers, Technopark software company contact"
+        schema={{
+          '@context': 'https://schema.org',
+          '@graph': [
+            faqPageSchema(faqs),
+            breadcrumbSchema([{ name: 'Contact', url: '/contact' }]),
+          ],
+        }}
       />
 
       {/* Hero */}
